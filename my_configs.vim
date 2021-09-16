@@ -1,58 +1,35 @@
 call plug#begin('~/.vim/plugged')
-
-" coc.nvim
-" Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Or build from source code by using yarn: https://yarnpkg.com
-" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-
-" vim-emmet
 Plug 'mattn/emmet-vim'
-
-" onedark theme
 Plug 'joshdick/onedark.vim'
-
-" vim-session
 Plug 'xolox/vim-session'
-
-" vim-session 依赖
 Plug 'xolox/vim-misc'
-
-" eslint plugin
 Plug 'Chiel92/vim-autoformat'
-
-" vim jsx
-" Plug 'maxmellon/vim-jsx-pretty'
-
-" commenter
 Plug 'preservim/nerdcommenter'
-
 Plug 'peitalin/vim-jsx-typescript'
-
-" Plug 'kiteco/vim-plugin'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" tagbar
 Plug 'liuchengxu/vista.vim'
-
 Plug 'honza/vim-snippets'
-
+Plug 'sainnhe/gruvbox-material'
 " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-
 call plug#end()
 
-" 配置缩进
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 显示相关  
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-" 相对行号
 set nu
 set relativenumber
 set noeol
 set cursorline
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 键位映射 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use <Tab> and <S-Tab> to navigate the completion list
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -97,7 +74,13 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Prettier
 nnoremap <F3> :Prettier<CR>
 " git diff
-nnoremap <silent> <leader>d :!git d<cr>
+nnoremap <silent> <leader>d :Git<cr>
+nnoremap <F2> :Vista!!<cr>
+map <C-A> ggVG$"+y``
+noremap H ^
+noremap L $
+noremap M %
+imap jj <Esc>
 
 let g:ale_enabled = 0
 " nerdcommenter
@@ -108,18 +91,10 @@ set updatetime=1000
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 let g:ctrlp_mruf_case_sensitive = 0
-" let g:Lf_WindowPosition = 'popup'
-" let g:Lf_PreviewInPopup = 1
 
 " 剪切板同步
 set clipboard=unnamed
 
-" let g:Lf_WindowPosition = 'popup'
-" onedark.vim override: Don't set a background color when running in a terminal;
-" just use the terminal's background color
-" `gui` is the hex color code used in GUI mode/nvim true-color mode
-" `cterm` is the color code used in 256-color mode
-" `cterm16` is the color code used in 16-color mode
 if (has("autocmd") && !has("gui_running"))
   augroup colorset
     autocmd!
@@ -128,7 +103,11 @@ if (has("autocmd") && !has("gui_running"))
   augroup END
 endif
 
-" let g:dracula_italic = 0
+" https://github.com/sainnhe/gruvbox-material/issues/5
+" let g:gruvbox_italicu = 0
+" set termguicolors
+" colorscheme gruvbox-material
+" hi Comment term=bold cterm=NONE ctermfg=245 gui=NONE guifg=#928374
 colorscheme onedark
 
 function! s:show_documentation()
@@ -151,10 +130,6 @@ endfunction
 
 set statusline+=%{NearestMethodOrFunction()}
 
-" By default vista.vim never run if you don't call it explicitly.
-"
-" If you want to show the nearest function in your statusline automatically,
-" you can add the following line to your vimrc
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'ctags'
@@ -171,4 +146,3 @@ let g:vista#renderer#icons = {
 			\   "function": "\uf794",
 			\   "variable": "\uf71b",
 			\  }
-nnoremap <F2> :Vista!!<cr>
