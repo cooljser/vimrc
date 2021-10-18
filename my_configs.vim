@@ -4,13 +4,19 @@ Plug 'mattn/emmet-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
-Plug 'Chiel92/vim-autoformat'
+" Plug 'Chiel92/vim-autoformat'
 Plug 'preservim/nerdcommenter'
 Plug 'peitalin/vim-jsx-typescript'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 Plug 'honza/vim-snippets'
-Plug 'sainnhe/gruvbox-material'
+" Plug 'sainnhe/gruvbox-material'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'dyng/ctrlsf.vim'
+Plug 'mnishz/colorscheme-preview.vim'
 " Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 call plug#end()
 
@@ -53,12 +59,13 @@ nnoremap <leader>ss :SaveSession
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 nnoremap <leader>ev :vs ~/.vim_runtime/my_configs.vim<CR>
-noremap <leader>t :bot ter++rows=15<CR>
+noremap <leader>t :bot ter++rows=20<CR>
 " 函数跳转
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" nmap <leader>t <Plug>(coc-terminal-toggle)
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 " Apply AutoFix to problem on the current line.
@@ -69,18 +76,25 @@ nnoremap <leader>r :e!<CR>
 nnoremap <leader>c :q<CR>
 " Source vim config
 nnoremap <leader>sv :source ~/.vimrc<CR>
+" open commit history 
+nnoremap <leader>h :GV<CR>
+" open current file history`
+nnoremap <leader>ch :GV!<CR>
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-" Prettier
-nnoremap <F3> :Prettier<CR>
 " git diff
 nnoremap <silent> <leader>d :Git<cr>
-nnoremap <F2> :Vista!!<cr>
+nnoremap <F2> :Git blame<cr>
+" nnoremap <F3> :Vista!!<cr>
+nnoremap <F4> :CocCommand eslint.executeAutofix<CR>
 map <C-A> ggVG$"+y``
 noremap H ^
 noremap L $
 noremap M %
 imap jj <Esc>
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
 
 let g:ale_enabled = 0
 " nerdcommenter
@@ -95,20 +109,9 @@ let g:ctrlp_mruf_case_sensitive = 0
 " 剪切板同步
 set clipboard=unnamed
 
-if (has("autocmd") && !has("gui_running"))
-  augroup colorset
-    autocmd!
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
-  augroup END
-endif
-
-" https://github.com/sainnhe/gruvbox-material/issues/5
-" let g:gruvbox_italicu = 0
-" set termguicolors
-" colorscheme gruvbox-material
-" hi Comment term=bold cterm=NONE ctermfg=245 gui=NONE guifg=#928374
-colorscheme onedark
+let g:onedark_terminal_italics=1
+let g:onedark_termcolors=16
+colorscheme onedark 
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -124,25 +127,34 @@ endfunction
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " vista.vim
-function! NearestMethodOrFunction() abort
-	return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
+" function! NearestMethodOrFunction() abort
+	" return get(b:, 'vista_nearest_method_or_function', '')
+" endfunction
 
-set statusline+=%{NearestMethodOrFunction()}
+" set statusline+=%{NearestMethodOrFunction()}
 
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'ctags'
-let g:vista_executive_for = {
-			\ 'javascript': 'coc',
-			\ 'typescript': 'coc',
-			\ }
-let g:vista_ctags_cmd = {
-			\ 'haskell': 'hasktags -x -o - -c',
-			\ }
-let g:vista_fzf_preview = ['right:50%']
-let g:vista#renderer#enable_icon = 1
-let g:vista#renderer#icons = {
-			\   "function": "\uf794",
-			\   "variable": "\uf71b",
-			\  }
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+" let g:vista_default_executive = 'ctags'
+" let g:vista_executive_for = {
+      " \ 'javascript': 'coc',
+      " \ 'typescript': 'coc',
+      " \ }
+" let g:vista_ctags_cmd = {
+      " \ 'haskell': 'hasktags -x -o - -c',
+      " \ }
+" let g:vista_fzf_preview = ['right:50%']
+" let g:vista#renderer#enable_icon = 1
+" let g:vista#renderer#icons = {
+      " \   "function": "\uf794",
+      " \   "variable": "\uf71b",
+      " \  }
+
+" insert mode 光标为竖线
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
