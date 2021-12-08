@@ -9,7 +9,9 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'othree/es.next.syntax.vim'
 Plug 'tomtom/tlib_vim'
+Plug 'SirVer/ultisnips'
 Plug 'cooljser/vim-snippets'
+Plug 'rstacruz/vim-ultisnips-css'
 Plug 'tpope/vim-fugitive'
 Plug 'easymotion/vim-easymotion'
 Plug 'rafi/awesome-vim-colorschemes'
@@ -24,17 +26,16 @@ Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'michaeljsmith/vim-indent-object'
+" Plug 'yggdroot/indentline'
+" Plug 'frazrepo/vim-rainbow'
+" Plug 'mhinz/vim-startify'
 " Plug 'junegunn/gv.vim'
 " Plug 'kiteco/vim-plugin'
 " Plug 'pechorin/any-jump.vim'
 " Plug 'sheerun/vim-polyglot'
 " Plug 'Chiel92/vim-autoformat'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'SirVer/ultisnips'
 " Plug 'dyng/ctrlsf.vim'
-" Plug 'mnishz/colorscheme-preview.vim'
 " Plug 'tomasiser/vim-code-dark'
 " Plug '907th/vim-auto-save'
 " Plug 'sainnhe/gruvbox-material'
@@ -302,12 +303,12 @@ nnoremap <C-f> :GFiles<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 
-let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript']
+let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript', 'css', 'less']
 " nerdcommenter
 let g:NERDSpaceDelims = 1
 " 默认开启 gitgutter
 let g:gitgutter_enabled = 1
-set updatetime=1000
+set updatetime=100
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 let g:node_client_debug = 1
@@ -325,6 +326,10 @@ let g:gruvbox_bold=0
 " let g:gruvbox_transparent_bg=1
 colorscheme gruvbox
 " colorscheme onedark
+
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -400,9 +405,9 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x <Plug>(coc-convert-snippet)
 
-let g:session_autoload = 'yes'
+" let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
-let g:session_default_to_last = 1
+" let g:session_default_to_last = 1
 
 " 禁止自动注释到新一行
 augroup Format-Options
@@ -455,3 +460,9 @@ let g:lightline = {
       \ 'subseparator': { 'left': ' ', 'right': ' ' }
       \ }
 
+" assumes set ignorecase smartcase
+augroup dynamic_smartcase
+    autocmd!
+    autocmd CmdLineEnter : set nosmartcase
+    autocmd CmdLineLeave : set smartcase
+augroup END
