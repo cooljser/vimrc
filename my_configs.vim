@@ -24,7 +24,7 @@ Plug 'heavenshell/vim-jsdoc', {
 \}
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'preservim/nerdtree'
-Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'hail2u/vim-css3-syntax'
@@ -32,7 +32,9 @@ Plug 'mileszs/ack.vim'
 Plug 'groenewege/vim-less'
 Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
+
 " Plug 'kqito/vim-easy-replace'
+" Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 " Plug 'airblade/vim-gitgutter'
 " Plug 'yggdroot/indentline'
 " Plug 'frazrepo/vim-rainbow'
