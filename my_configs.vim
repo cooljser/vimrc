@@ -15,6 +15,7 @@ Plug 'rstacruz/vim-ultisnips-css'
 Plug 'tpope/vim-fugitive'
 Plug 'easymotion/vim-easymotion'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'mnishz/colorscheme-preview.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'heavenshell/vim-jsdoc', {
@@ -23,9 +24,16 @@ Plug 'heavenshell/vim-jsdoc', {
 \}
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'preservim/nerdtree'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'mileszs/ack.vim'
+Plug 'groenewege/vim-less'
+Plug 'jiangmiao/auto-pairs'
+Plug 'terryma/vim-multiple-cursors'
+" Plug 'kqito/vim-easy-replace'
+" Plug 'airblade/vim-gitgutter'
 " Plug 'yggdroot/indentline'
 " Plug 'frazrepo/vim-rainbow'
 " Plug 'mhinz/vim-startify'
@@ -123,6 +131,7 @@ set noswapfile
 set expandtab
 " Be smart when using tabs ;)
 set smarttab
+set wildmenu
 " Linebreak on 500 characters
 set lbr
 set tw=500
@@ -302,6 +311,7 @@ noremap <F5> : call CompileRunGcc()<CR>
 nnoremap <C-f> :GFiles<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
+nnoremap <Leader>g :Ack!<Space>
 
 let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript', 'css', 'less']
 " nerdcommenter
@@ -405,7 +415,7 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x <Plug>(coc-convert-snippet)
 
-" let g:session_autoload = 'yes'
+let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 " let g:session_default_to_last = 1
 
