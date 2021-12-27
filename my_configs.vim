@@ -6,8 +6,7 @@ Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 Plug 'preservim/nerdcommenter'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'othree/es.next.syntax.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'tomtom/tlib_vim'
 Plug 'SirVer/ultisnips'
 Plug 'cooljser/vim-snippets'
@@ -15,7 +14,6 @@ Plug 'rstacruz/vim-ultisnips-css'
 Plug 'tpope/vim-fugitive'
 Plug 'easymotion/vim-easymotion'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'mnishz/colorscheme-preview.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'heavenshell/vim-jsdoc', {
@@ -27,22 +25,31 @@ Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
-Plug 'hail2u/vim-css3-syntax'
 Plug 'mileszs/ack.vim'
-Plug 'groenewege/vim-less'
 Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'chr4/nginx.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'leafOfTree/vim-matchtag'
+Plug 'mbbill/undotree'
+Plug 'sheerun/vim-polyglot'
 
+" Plug 'mnishz/colorscheme-preview.vim'
+" Plug 'groenewege/vim-less'
+" Plug 'hail2u/vim-css3-syntax'
+" Plug 'yggdroot/indentline'
+" Plug 'github/copilot.vim'
+" Plug 'dstein64/vim-startuptime'
+" Plug 'jelera/vim-javascript-syntax'
+" Plug 'othree/es.next.syntax.vim'
 " Plug 'kqito/vim-easy-replace'
 " Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 " Plug 'airblade/vim-gitgutter'
-" Plug 'yggdroot/indentline'
 " Plug 'frazrepo/vim-rainbow'
 " Plug 'mhinz/vim-startify'
 " Plug 'junegunn/gv.vim'
 " Plug 'kiteco/vim-plugin'
 " Plug 'pechorin/any-jump.vim'
-" Plug 'sheerun/vim-polyglot'
 " Plug 'Chiel92/vim-autoformat'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'dyng/ctrlsf.vim'
@@ -64,6 +71,17 @@ nmap <leader>w :w!<cr>
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+""""""""""""""""""""""""""""""
+" => Shell section
+""""""""""""""""""""""""""""""
+if exists('$TMUX')
+    if has('nvim')
+        set termguicolors
+    else
+        set term=screen-256color
+    endif
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 显示相关  
@@ -170,11 +188,6 @@ if has("win16") || has("win32")
     set wildignore+=.git\*,.hg\*,.svn\*
 else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
-
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
 endif
 
 " Set extra options when running in GUI mode
@@ -298,7 +311,8 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <leader>d :Git<cr>
 nnoremap <F2> :Git blame<cr>
 nnoremap <F3> :Vista!!<cr>
-nnoremap <F4> :CocCommand eslint.executeAutofix<CR>
+nnoremap <F4> :UndotreeToggle<CR>
+nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
 nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
 map <C-A> ggVG$"+y``
@@ -309,9 +323,7 @@ imap jj <Esc>
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
-noremap <F5> : call CompileRunGcc()<CR>
 nnoremap <C-f> :GFiles<CR>
-nnoremap <C-b> :Buffers<CR>
 nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 nnoremap <Leader>g :Ack!<Space>
 
@@ -324,20 +336,25 @@ set updatetime=100
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 let g:node_client_debug = 1
+let g:mkdp_refresh_slow = 1
+let g:vim_matchtag_enable_by_default = 1
+" html match tag
+let g:vim_matchtag_files = '*.html'
+let g:vim_matchtag_highlight_cursor_on = 1
 
 " 剪切板同步
 set clipboard=unnamed
 
-let g:onedark_terminal_italics=1
+let g:onedark_terminal_italics=0
 let g:onedark_termcolors=16
-" colorscheme onedark 
+colorscheme onedark 
 " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
-let g:gruvbox_contrast_dark='soft'
-let g:gruvbox_termcolors=16
-let g:gruvbox_bold=0
+" let g:gruvbox_contrast_dark='soft'
+" let g:gruvbox_termcolors=16
+" let g:gruvbox_bold=0
 " let g:gruvbox_transparent_bg=1
-colorscheme gruvbox
-" colorscheme onedark
+" let g:gruvbox_transparent_bg=1
+" colorscheme gruvbox
 
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -396,13 +413,13 @@ let g:vista#renderer#icons = {
       \  }
 
 " insert mode 光标为竖线
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
+" if exists('$TMUX')
+  " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  " let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" else
+  " let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  " let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" endif
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
@@ -452,7 +469,7 @@ map <leader>nf :NERDTreeFind<cr>
 " => lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
       \             ['fugitive', 'readonly', 'relativepath', 'modified'] ],
