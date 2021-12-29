@@ -34,6 +34,7 @@ Plug 'leafOfTree/vim-matchtag'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
 
+" Plug 'dense-analysis/ale'
 " Plug 'mnishz/colorscheme-preview.vim'
 " Plug 'groenewege/vim-less'
 " Plug 'hail2u/vim-css3-syntax'
@@ -356,6 +357,11 @@ colorscheme onedark
 " let g:gruvbox_transparent_bg=1
 " colorscheme gruvbox
 
+" let g:ale_floating_preview = 1
+" let g:ale_hover_to_floating_preview = 1
+" let g:ale_detail_to_floating_preview = 1
+" let g:ale_close_preview_on_insert = 1
+
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -413,13 +419,13 @@ let g:vista#renderer#icons = {
       \  }
 
 " insert mode 光标为竖线
-" if exists('$TMUX')
-  " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  " let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-" else
-  " let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  " let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-" endif
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
