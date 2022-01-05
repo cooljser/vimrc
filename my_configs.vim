@@ -33,8 +33,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'leafOfTree/vim-matchtag'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
-
 " Plug 'dense-analysis/ale'
+
 " Plug 'mnishz/colorscheme-preview.vim'
 " Plug 'groenewege/vim-less'
 " Plug 'hail2u/vim-css3-syntax'
