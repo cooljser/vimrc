@@ -1,20 +1,28 @@
 call plug#begin('~/.vim/plugged')
+" ========= colorscheme here. ==========
+Plug 'joshdick/onedark.vim'
+Plug 'rafi/awesome-vim-colorschemes'
+
+" ========= programming tools here. ==========
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim'
-Plug 'joshdick/onedark.vim'
-Plug 'xolox/vim-session'
-Plug 'xolox/vim-misc'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'groenewege/vim-less'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'leafgarland/typescript-vim'
 Plug 'preservim/nerdcommenter'
 Plug 'tomtom/tlib_vim'
 Plug 'SirVer/ultisnips'
 Plug 'cooljser/vim-snippets'
 Plug 'rstacruz/vim-ultisnips-css'
+
+" ========= syntax support here. ==========
+Plug 'groenewege/vim-less'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'leafgarland/typescript-vim'
+Plug 'chr4/nginx.vim'
+Plug 'sheerun/vim-polyglot'
+
+" ========= useful tools here. ==========
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
 Plug 'tpope/vim-fugitive'
-Plug 'rafi/awesome-vim-colorschemes'
 Plug 'liuchengxu/vista.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
@@ -24,16 +32,18 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'chr4/nginx.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'leafOfTree/vim-matchtag'
-Plug 'sheerun/vim-polyglot'
 Plug 'phaazon/hop.nvim'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'xiyaowong/nvim-cursorword'
-
+Plug 'kdheepak/lazygit.nvim'
+Plug 'dstein64/vim-startuptime'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'eliba2/vim-node-inspect'
 " Plug 'ryanoasis/vim-devicons'
+" Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'sindrets/diffview.nvim'
 " Plug 'mbbill/undotree'
@@ -59,11 +69,9 @@ Plug 'xiyaowong/nvim-cursorword'
 " Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 " Plug '907th/vim-auto-save'
 " Plug 'sainnhe/gruvbox-material'
-" Plug 'eliba2/vim-node-inspect'
 call plug#end()
 
 " With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
 let mapleader = ","
 " Fast saving
 nmap <leader>w :w<cr>
@@ -71,19 +79,9 @@ nmap <leader>w :w<cr>
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
-""""""""""""""""""""""""""""""
-" => Shell section
-""""""""""""""""""""""""""""""
-if exists('$TMUX')
-    if has('nvim')
-        set termguicolors
-    else
-        set term=screen-256color
-    endif
-endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 显示相关  
+" Basic 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tabstop=1
 set softtabstop=2
@@ -136,21 +134,12 @@ set foldcolumn=1
 set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git etc. anyway...
 set nobackup
 set nowb
 set noswapfile
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
 set expandtab
 " Be smart when using tabs ;)
 set smarttab
-set wildmenu
 " Linebreak on 500 characters
 set lbr
 set tw=500
@@ -158,8 +147,6 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 au FocusGained,BufEnter * checktime
-" 让配置变更立即生效
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
 set rtp+=/usr/local/opt/fzf
 
 " Enable filetype plugins
@@ -221,9 +208,9 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
 
 map <leader>j :HopWord<cr>
+nnoremap <silent> <leader>t :LazyGit<CR>
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
@@ -311,11 +298,9 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <leader>d :Git<cr>
 nnoremap <F2> :Git blame<cr>
 nnoremap <F3> :Vista!!<cr>
-nnoremap <F4> :UndotreeToggle<CR>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
 nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
-map <C-A> ggVG$"+y``
 noremap H ^
 noremap L $
 noremap M %
@@ -343,6 +328,7 @@ let g:vim_matchtag_files = '*.html'
 let g:vim_matchtag_highlight_cursor_on = 1
 
 lua require'hop'.setup { keys = 'etovxqpdygfblzhckisuran', jump_on_sole_occurrence = false }
+lua require('gitsigns').setup()
 
 " 剪切板同步
 set clipboard=unnamed
@@ -508,3 +494,20 @@ hi! CursorWord cterm=underline gui=underline
 
 " ignore nerdtree when open session 
  set sessionoptions-=blank
+
+ """"""""""""""""""""""""""""""
+" => Shell section
+""""""""""""""""""""""""""""""
+if exists('$TMUX')
+    if has('nvim')
+        set termguicolors
+    else
+        set term=screen-256color
+    endif
+endif
+
+nnoremap <silent><F6> :NodeInspectRun<cr>
+nnoremap <silent><F7> :NodeInspectStepInto<cr>
+nnoremap <silent><F8> :NodeInspectStepOver<cr>
+nnoremap <silent><F9> :NodeInspectToggleBreakpoint<cr>
+nnoremap <silent><F10> :NodeInspectStop<cr>
