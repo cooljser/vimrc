@@ -1,5 +1,5 @@
 call plug#begin('~/.vim/plugged')
-" ========= colorscheme here. ==========
+" ========= apperance here. ==========
 Plug 'joshdick/onedark.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 
@@ -11,19 +11,19 @@ Plug 'tomtom/tlib_vim'
 Plug 'SirVer/ultisnips'
 Plug 'cooljser/vim-snippets'
 Plug 'rstacruz/vim-ultisnips-css'
+Plug 'github/copilot.vim'
+Plug 'ap/vim-css-color'
 
 " ========= syntax support here. ==========
 Plug 'groenewege/vim-less'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
-Plug 'chr4/nginx.vim'
 Plug 'sheerun/vim-polyglot'
 
 " ========= useful tools here. ==========
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 Plug 'tpope/vim-fugitive'
-Plug 'liuchengxu/vista.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'preservim/nerdtree'
@@ -37,11 +37,15 @@ Plug 'leafOfTree/vim-matchtag'
 Plug 'phaazon/hop.nvim'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'xiyaowong/nvim-cursorword'
-Plug 'kdheepak/lazygit.nvim'
 Plug 'dstein64/vim-startuptime'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'eliba2/vim-node-inspect'
+Plug 'vim-autoformat/vim-autoformat'
+Plug 'kdheepak/lazygit.nvim'
+Plug 'liuchengxu/vista.vim'
+
+" Plug 'chr4/nginx.vim'
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'nvim-lua/plenary.nvim'
@@ -71,13 +75,9 @@ Plug 'eliba2/vim-node-inspect'
 " Plug 'sainnhe/gruvbox-material'
 call plug#end()
 
-" With a map leader it's possible to do extra key combinations
 let mapleader = ","
 " Fast saving
-nmap <leader>w :w<cr>
-" :W sudo saves the file
-" (useful for handling the permission-denied error)
-command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+nmap <leader>w :wa<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -148,25 +148,19 @@ set si "Smart indent
 set wrap "Wrap lines
 au FocusGained,BufEnter * checktime
 set rtp+=/usr/local/opt/fzf
-
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
-
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
-
 " Turn on the Wild menu
 set wildmenu
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -184,7 +178,6 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -199,9 +192,6 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -245,9 +235,6 @@ if has("mac") || has("macunix")
   vmap <D-j> <M-j>
   vmap <D-k> <M-k>
 endif
-
-" Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " Use <Tab> and <S-Tab> to navigate the completion list
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -298,13 +285,14 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <leader>d :Git<cr>
 nnoremap <F2> :Git blame<cr>
 nnoremap <F3> :Vista!!<cr>
+nnoremap <F4> :Autoformat<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
-nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
+nnoremap <leader>f :Autoformat<CR>
 noremap H ^
 noremap L $
 noremap M %
-imap jj <Esc>
+" imap jj <Esc>
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
@@ -317,10 +305,10 @@ let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 't
 let g:NERDSpaceDelims = 1
 " 默认开启 gitgutter
 let g:gitgutter_enabled = 1
-set updatetime=100
+set updatetime=300
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
-let g:node_client_debug = 1
+let g:node_client_debug = 0
 let g:mkdp_refresh_slow = 1
 let g:vim_matchtag_enable_by_default = 1
 " html match tag
@@ -328,7 +316,7 @@ let g:vim_matchtag_files = '*.html'
 let g:vim_matchtag_highlight_cursor_on = 1
 
 lua require'hop'.setup { keys = 'etovxqpdygfblzhckisuran', jump_on_sole_occurrence = false }
-lua require('gitsigns').setup()
+lua require('gitsigns').setup { current_line_blame = true, current_line_blame_opts = { delay = 1000 } }
 
 " 剪切板同步
 set clipboard=unnamed
@@ -511,3 +499,13 @@ nnoremap <silent><F7> :NodeInspectStepInto<cr>
 nnoremap <silent><F8> :NodeInspectStepOver<cr>
 nnoremap <silent><F9> :NodeInspectToggleBreakpoint<cr>
 nnoremap <silent><F10> :NodeInspectStop<cr>
+
+" always show sign column
+set signcolumn=yes
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+" command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+" map <leader>l :bnext<cr>
+" map <leader>h :bprevious<cr>
+
