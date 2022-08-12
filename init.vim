@@ -2,17 +2,14 @@ call plug#begin('~/.vim/plugged')
 " ========= apperance here. ==========
 Plug 'joshdick/onedark.vim'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'dracula/vim'
 " Plug 'mnishz/colorscheme-preview.vim'
+" Plug 'chxuan/change-colorscheme'
 
 " ========= programming tools here. ==========
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
+" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
-" Plug 'tomtom/tlib_vim'
-" Plug 'SirVer/ultisnips'
-" Plug 'cooljser/vim-snippets'
-" Plug 'rstacruz/vim-ultisnips-css'
 Plug 'github/copilot.vim'
 Plug 'ap/vim-css-color'
 
@@ -21,6 +18,7 @@ Plug 'groenewege/vim-less'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'posva/vim-vue'
 
 " ========= useful tools here. ==========
 Plug 'xolox/vim-session'
@@ -38,16 +36,22 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'leafOfTree/vim-matchtag'
 Plug 'phaazon/hop.nvim'
 Plug 'akinsho/toggleterm.nvim'
-Plug 'xiyaowong/nvim-cursorword'
+Plug 'xiyaowong/nvim-cursorword', { 'commit': '338d4f7de49ef654caf45beb86733a786943f933' }
 Plug 'dstein64/vim-startuptime'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'eliba2/vim-node-inspect'
 Plug 'vim-autoformat/vim-autoformat'
 Plug 'kdheepak/lazygit.nvim'
-Plug 'liuchengxu/vista.vim'
 Plug 'yggdroot/indentline'
 
+" Plug 'liuchengxu/vista.vim'
+" Plug 'dracula/vim'
+" Plug 'tomtom/tlib_vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" Plug 'cooljser/vim-snippets'
+" Plug 'rstacruz/vim-ultisnips-css'
 " Plug 'chr4/nginx.vim'
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'nvim-treesitter/nvim-treesitter'
@@ -260,13 +264,11 @@ nnoremap <leader>ss :SaveSession
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 nnoremap <leader>ev :vs ~/.config/nvim/init.vim<CR>
-" noremap <leader>t :bot ter++rows=20<CR>
 " 函数跳转
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-" nmap <leader>t <Plug>(coc-terminal-toggle)
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 " Apply AutoFix to problem on the current line.
@@ -286,11 +288,11 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " git diff
 nnoremap <silent> <leader>d :Git<cr>
 nnoremap <F2> :Git blame<cr>
-nnoremap <F3> :Vista!!<cr>
+" nnoremap <F3> :Vista!!<cr>
 nnoremap <F4> :Autoformat<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
-nnoremap <leader>f :Autoformat<CR>
+nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
 noremap H ^
 noremap L $
 noremap M %
@@ -325,7 +327,7 @@ set clipboard=unnamed
 let g:onedark_terminal_italics=0
 let g:onedark_termcolors=16
 colorscheme onedark 
-" autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 hi Normal guibg=NONE ctermbg=NONE
 " let g:gruvbox_contrast_dark='soft'
 " let g:gruvbox_termcolors=16
@@ -373,22 +375,22 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " set statusline+=%{NearestMethodOrFunction()}
 
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'ctags'
-let g:vista_executive_for = {
-      \ 'javascript': 'coc',
-      \ 'typescript': 'coc',
-      \ }
-let g:vista_ctags_cmd = {
-      \ 'haskell': 'hasktags -x -o - -c',
-      \ }
-let g:vista_fzf_preview = ['right:50%']
-let g:vista#renderer#enable_icon = 1
-let g:vista#renderer#icons = {
-      \   "function": "\uf794",
-      \   "variable": "\uf71b",
-      \  }
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+" let g:vista_default_executive = 'ctags'
+" let g:vista_executive_for = {
+      " \ 'javascript': 'coc',
+      " \ 'typescript': 'coc',
+      " \ }
+" let g:vista_ctags_cmd = {
+      " \ 'haskell': 'hasktags -x -o - -c',
+      " \ }
+" let g:vista_fzf_preview = ['right:50%']
+" let g:vista#renderer#enable_icon = 1
+" let g:vista#renderer#icons = {
+      " \   "function": "\uf794",
+      " \   "variable": "\uf71b",
+      " \  }
 
 " insert mode 光标为竖线
 if exists('$TMUX')
@@ -412,9 +414,9 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x <Plug>(coc-convert-snippet)
 
-let g:session_autoload = 'no'
+let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
-" let g:session_default_to_last = 1
+let g:session_default_to_last = 1
 
 " 禁止自动注释到新一行
 augroup Format-Options
@@ -479,7 +481,7 @@ autocmd TermEnter term://*toggleterm#*
       \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm size=20 direction='float'"<CR>
 
-hi! CursorWord cterm=underline gui=underline
+hi! CursorWord guibg=#484b4d ctermbg=223
 
 " ignore nerdtree when open session 
  set sessionoptions-=blank
@@ -509,3 +511,5 @@ set signcolumn=yes
 " command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " map <leader>l :bnext<cr>
 " map <leader>h :bprevious<cr>
+
+set completeopt=menu,menuone,noselect
