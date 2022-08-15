@@ -1,9 +1,9 @@
+let g:polyglot_disabled = ['markdown']
+
 call plug#begin('~/.vim/plugged')
 " ========= apperance here. ==========
 Plug 'joshdick/onedark.vim'
 Plug 'rafi/awesome-vim-colorschemes'
-" Plug 'mnishz/colorscheme-preview.vim'
-" Plug 'chxuan/change-colorscheme'
 
 " ========= programming tools here. ==========
 Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
@@ -11,14 +11,14 @@ Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
 Plug 'github/copilot.vim'
-Plug 'ap/vim-css-color'
+Plug 'ap/vim-css-color', {'for': ['css', 'less']}
 
 " ========= syntax support here. ==========
-Plug 'groenewege/vim-less'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'leafgarland/typescript-vim'
+Plug 'groenewege/vim-less', {'for': ['less']}
+Plug 'peitalin/vim-jsx-typescript', {'for': ['javascript.jsx', 'javascript.tsx']}
+Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
 Plug 'sheerun/vim-polyglot'
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 
 " ========= useful tools here. ==========
 Plug 'xolox/vim-session'
@@ -32,7 +32,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'leafOfTree/vim-matchtag'
 Plug 'phaazon/hop.nvim'
 Plug 'akinsho/toggleterm.nvim'
