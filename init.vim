@@ -1,4 +1,6 @@
-let g:polyglot_disabled = ['markdown']
+" https://github.com/sheerun/vim-polyglot/issues/741
+let g:vue_pre_processors = []
+let g:polyglot_disabled = ['markdown', 'vue']
 
 call plug#begin('~/.vim/plugged')
 " ========= apperance here. ==========
@@ -6,8 +8,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 
 " ========= programming tools here. ==========
-Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
 Plug 'github/copilot.vim'
@@ -243,19 +245,18 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-" Use <Tab> and <S-Tab> to navigate the completion list
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+  \ coc#pum#visible() ? coc#_select_confirm() :
+  \ coc#expandableOrJumpable() ?
+  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
 
 " cancel highlight
 nnoremap <CR> :noh<CR><CR>
@@ -306,7 +307,7 @@ nnoremap <A-f> :Files<CR>
 nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 nnoremap <Leader>g :Ack!<Space>
 
-let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript', 'css', 'less', 'vue']
+let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript', 'css', 'less']
 " nerdcommenter
 let g:NERDSpaceDelims = 1
 " 默认开启 gitgutter
@@ -520,3 +521,6 @@ let g:barbaric_ime = 'macos'
 let g:barbaric_default = 0
 let g:barbaric_scope = 'buffer'
 let g:barbaric_timeout = -1
+
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+        let g:copilot_no_tab_map = v:true
