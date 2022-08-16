@@ -7,7 +7,7 @@ Plug 'rafi/awesome-vim-colorschemes'
 
 " ========= programming tools here. ==========
 Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
-" Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
 Plug 'github/copilot.vim'
@@ -18,7 +18,7 @@ Plug 'groenewege/vim-less', {'for': ['less']}
 Plug 'peitalin/vim-jsx-typescript', {'for': ['javascript.jsx', 'javascript.tsx']}
 Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
 Plug 'sheerun/vim-polyglot'
-" Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue', {'for': ['vue']}
 
 " ========= useful tools here. ==========
 Plug 'xolox/vim-session'
@@ -32,7 +32,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'leafOfTree/vim-matchtag'
 Plug 'phaazon/hop.nvim'
 Plug 'akinsho/toggleterm.nvim'
@@ -44,6 +44,7 @@ Plug 'eliba2/vim-node-inspect'
 Plug 'vim-autoformat/vim-autoformat'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'yggdroot/indentline'
+Plug 'rlue/vim-barbaric'
 
 " Plug 'liuchengxu/vista.vim'
 " Plug 'dracula/vim'
@@ -301,10 +302,11 @@ noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
 nnoremap <C-f> :GFiles<CR>
+nnoremap <A-f> :Files<CR>
 nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 nnoremap <Leader>g :Ack!<Space>
 
-let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript', 'css', 'less']
+let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript', 'css', 'less', 'vue']
 " nerdcommenter
 let g:NERDSpaceDelims = 1
 " 默认开启 gitgutter
@@ -513,3 +515,8 @@ set signcolumn=yes
 " map <leader>h :bprevious<cr>
 
 set completeopt=menu,menuone,noselect
+
+let g:barbaric_ime = 'macos'
+let g:barbaric_default = 0
+let g:barbaric_scope = 'buffer'
+let g:barbaric_timeout = -1
