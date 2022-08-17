@@ -8,8 +8,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 
 " ========= programming tools here. ==========
-" Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
 Plug 'github/copilot.vim'
@@ -245,18 +245,19 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
+" Use <Tab> and <S-Tab> to navigate the completion list
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <TAB>
-  \ coc#pum#visible() ? coc#_select_confirm() :
-  \ coc#expandableOrJumpable() ?
-  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
 
 " cancel highlight
 nnoremap <CR> :noh<CR><CR>
@@ -290,7 +291,7 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " git diff
 nnoremap <silent> <leader>d :Git<cr>
 nnoremap <F2> :Git blame<cr>
-" nnoremap <F3> :Vista!!<cr>
+nnoremap <F3> :CocDiagnostics<cr>
 nnoremap <F4> :Autoformat<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
@@ -517,10 +518,8 @@ set signcolumn=yes
 
 set completeopt=menu,menuone,noselect
 
+" 进入insert模式后，自动恢复上次使用的输入法
 let g:barbaric_ime = 'macos'
 let g:barbaric_default = 0
 let g:barbaric_scope = 'buffer'
 let g:barbaric_timeout = -1
-
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-        let g:copilot_no_tab_map = v:true
