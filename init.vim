@@ -8,11 +8,11 @@ Plug 'joshdick/onedark.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 
 " ========= programming tools here. ==========
-Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 Plug 'ap/vim-css-color', {'for': ['css', 'less']}
 
 " ========= syntax support here. ==========
@@ -178,10 +178,9 @@ let g:onedark_termcolors=16
 colorscheme onedark 
 autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 hi Normal guibg=NONE ctermbg=NONE
-" let g:gruvbox_contrast_dark='hard'
+" let g:gruvbox_contrast_dark='middle'
 " let g:gruvbox_termcolors=16
 " let g:gruvbox_bold=0
-" let g:gruvbox_transparent_bg=1
 " let g:gruvbox_transparent_bg=1
 " colorscheme gruvbox
 
@@ -269,16 +268,13 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-" Use <Tab> and <S-Tab> to navigate the completion list
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" remap for complete to use tab and <cr>
+inoremap <silent><expr> <C-j>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
-
-" inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <expr><C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -409,7 +405,9 @@ autocmd TermEnter term://*toggleterm#*
       \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm size=20 direction='float'"<CR>
 
+" onedark color
 hi! CursorWord guibg=#484b4d ctermbg=223
+" hi! CursorWord guibg=#86786b ctermbg=223
 
 " ignore nerdtree when open session 
 set sessionoptions-=blank
