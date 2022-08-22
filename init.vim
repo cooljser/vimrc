@@ -20,7 +20,6 @@ Plug 'groenewege/vim-less', {'for': ['less']}
 Plug 'peitalin/vim-jsx-typescript', {'for': ['javascript.jsx', 'javascript.tsx']}
 Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
 Plug 'sheerun/vim-polyglot'
-" Plug 'posva/vim-vue', {'for': ['vue']}
 
 " ========= useful tools here. ==========
 Plug 'xolox/vim-session'
@@ -43,44 +42,12 @@ Plug 'dstein64/vim-startuptime'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'eliba2/vim-node-inspect'
-Plug 'vim-autoformat/vim-autoformat'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'yggdroot/indentline'
 Plug 'rlue/vim-barbaric'
-
-" Plug 'liuchengxu/vista.vim'
-" Plug 'dracula/vim'
-" Plug 'tomtom/tlib_vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Plug 'cooljser/vim-snippets'
-" Plug 'rstacruz/vim-ultisnips-css'
-" Plug 'chr4/nginx.vim'
-" Plug 'ryanoasis/vim-devicons'
-" Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'sindrets/diffview.nvim'
-" Plug 'mbbill/undotree'
-" Plug 'pangloss/vim-javascript'
-" Plug 'heavenshell/vim-jsdoc', {
-  " \ 'for': ['javascript', 'javascript.jsx','typescript'],
-  " \ 'do': 'make install'
-" \}
-" Plug 'azabiong/vim-highlighter'
-" Plug 'jelera/vim-javascript-syntax'
-" Plug 'othree/es.next.syntax.vim'
-" Plug 'aserowy/tmux.nvim'
-" Plug 'MarcWeber/vim-addon-mw-utils'
-" Plug 'garbas/vim-snipmate'
-" Plug 'mhinz/vim-startify'
-" Plug 'easymotion/vim-easymotion'
-" Plug 'dense-analysis/ale'
-" Plug 'github/copilot.vim'
-" Plug 'dstein64/vim-startuptime'
-" Plug 'kqito/vim-easy-replace'
-" Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
-" Plug '907th/vim-auto-save'
-" Plug 'sainnhe/gruvbox-material'
+
 call plug#end()
 
 let mapleader = ","
@@ -186,6 +153,67 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
+let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript', 'css', 'less']
+" nerdcommenter
+let g:NERDSpaceDelims = 1
+" 默认开启 gitgutter
+let g:gitgutter_enabled = 1
+set updatetime=300
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
+let g:mkdp_refresh_slow = 1
+let g:vim_matchtag_enable_by_default = 1
+" html match tag
+let g:vim_matchtag_files = '*.html'
+let g:vim_matchtag_highlight_cursor_on = 1
+
+lua require'hop'.setup { keys = 'etovxqpdygfblzhckisuran', jump_on_sole_occurrence = false }
+lua require('gitsigns').setup { current_line_blame = true, current_line_blame_opts = { delay = 1000 } }
+
+" 剪切板同步
+set clipboard=unnamed
+
+let g:onedark_terminal_italics=0
+let g:onedark_termcolors=16
+colorscheme onedark 
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
+hi Normal guibg=NONE ctermbg=NONE
+" let g:gruvbox_contrast_dark='hard'
+" let g:gruvbox_termcolors=16
+" let g:gruvbox_bold=0
+" let g:gruvbox_transparent_bg=1
+" let g:gruvbox_transparent_bg=1
+" colorscheme gruvbox
+
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+func! CompileRunGcc()
+    exec "w"
+    if &filetype == 'cpp'
+        exec '!g++ -std=c++11 % -o /tmp/a.out && /tmp/a.out<'
+        exec "!time ./%<"
+    elseif &filetype == 'javascript'
+        exec '!node %'
+    elseif &filetype == 'java'
+        exec '!javac %'
+        exec '!java %<'
+    elseif &filetype == 'sh'
+        :!time bash %
+    endif
+endfunc
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -203,17 +231,13 @@ map <C-l> <C-W>l
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
+" map <leader>to :tabonly<cr>
+" map <leader>tc :tabclose<cr>
+" map <leader>tm :tabmove
 map <leader>b :Buffers<cr>
 
 map <leader>j :HopWord<cr>
 nnoremap <silent> <leader>t :LazyGit<CR>
-
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 
 " Specify the behavior when switching between buffers
 try
@@ -254,6 +278,8 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
+" inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -292,7 +318,6 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <leader>d :Git<cr>
 nnoremap <F2> :Git blame<cr>
 nnoremap <F3> :CocDiagnostics<cr>
-nnoremap <F4> :Autoformat<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
 nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
@@ -308,93 +333,7 @@ nnoremap <A-f> :Files<CR>
 nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 nnoremap <Leader>g :Ack!<Space>
 
-let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript', 'css', 'less']
-" nerdcommenter
-let g:NERDSpaceDelims = 1
-" 默认开启 gitgutter
-let g:gitgutter_enabled = 1
-set updatetime=300
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
-let g:mkdp_refresh_slow = 1
-let g:vim_matchtag_enable_by_default = 1
-" html match tag
-let g:vim_matchtag_files = '*.html'
-let g:vim_matchtag_highlight_cursor_on = 1
-
-lua require'hop'.setup { keys = 'etovxqpdygfblzhckisuran', jump_on_sole_occurrence = false }
-lua require('gitsigns').setup { current_line_blame = true, current_line_blame_opts = { delay = 1000 } }
-
-" 剪切板同步
-set clipboard=unnamed
-
-let g:onedark_terminal_italics=0
-let g:onedark_termcolors=16
-colorscheme onedark 
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
-hi Normal guibg=NONE ctermbg=NONE
-" let g:gruvbox_contrast_dark='soft'
-" let g:gruvbox_termcolors=16
-" let g:gruvbox_bold=0
-" let g:gruvbox_transparent_bg=1
-" let g:gruvbox_transparent_bg=1
-" colorscheme gruvbox
-
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-func! CompileRunGcc()
-    exec "w"
-    if &filetype == 'cpp'
-        exec '!g++ -std=c++11 % -o /tmp/a.out && /tmp/a.out<'
-        exec "!time ./%<"
-    elseif &filetype == 'javascript'
-        exec '!node %'
-    elseif &filetype == 'java'
-        exec '!javac %'
-        exec '!java %<'
-    elseif &filetype == 'sh'
-        :!time bash %
-    endif
-endfunc
-
-" Add `:Format` command to format current buffer.
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" vista.vim
-" function! NearestMethodOrFunction() abort
-  " return get(b:, 'vista_nearest_method_or_function', '')
-" endfunction
-
-" set statusline+=%{NearestMethodOrFunction()}
-
-" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-" let g:vista_default_executive = 'ctags'
-" let g:vista_executive_for = {
-      " \ 'javascript': 'coc',
-      " \ 'typescript': 'coc',
-      " \ }
-" let g:vista_ctags_cmd = {
-      " \ 'haskell': 'hasktags -x -o - -c',
-      " \ }
-" let g:vista_fzf_preview = ['right:50%']
-" let g:vista#renderer#enable_icon = 1
-" let g:vista#renderer#icons = {
-      " \   "function": "\uf794",
-      " \   "variable": "\uf71b",
-      " \  }
 
 " insert mode 光标为竖线
 if exists('$TMUX')
@@ -404,19 +343,6 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
-
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-" Use <leader>x for convert visual selected code to snippet
-xmap <leader>x <Plug>(coc-convert-snippet)
 
 let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
@@ -456,16 +382,14 @@ let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ ['mode', 'paste'],
-      \             ['fugitive', 'readonly', 'relativepath', 'modified'] ],
+      \             ['fugitive', 'relativepath', 'modified'] ],
       \   'right': [ [ 'lineinfo' ], ['percent'] ]
       \ },
       \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
       \   'fugitive': '%{exists("*FugitiveHead")?FugitiveHead():""}'
       \ },
       \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
       \   'fugitive': '(exists("*FugitiveHead") && ""!=FugitiveHead())'
       \ },
@@ -488,7 +412,7 @@ nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm size=20 direction='float'
 hi! CursorWord guibg=#484b4d ctermbg=223
 
 " ignore nerdtree when open session 
- set sessionoptions-=blank
+set sessionoptions-=blank
 
  """"""""""""""""""""""""""""""
 " => Shell section
@@ -510,12 +434,6 @@ nnoremap <silent><F10> :NodeInspectStop<cr>
 " always show sign column
 set signcolumn=yes
 
-" :W sudo saves the file
-" (useful for handling the permission-denied error)
-" command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
-" map <leader>l :bnext<cr>
-" map <leader>h :bprevious<cr>
-
 set completeopt=menu,menuone,noselect
 
 " 进入insert模式后，自动恢复上次使用的输入法
@@ -523,3 +441,6 @@ let g:barbaric_ime = 'macos'
 let g:barbaric_default = 0
 let g:barbaric_scope = 'buffer'
 let g:barbaric_timeout = -1
+
+" 解决 coc-references 关闭后 cursor 消失的问题
+let g:coc_disable_transparent_cursor = 1
