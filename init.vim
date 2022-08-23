@@ -47,6 +47,7 @@ Plug 'yggdroot/indentline'
 Plug 'rlue/vim-barbaric'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'liuchengxu/vista.vim'
 
 call plug#end()
 
@@ -268,13 +269,10 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm(): "\<Tab>"
 " remap for complete to use tab and <cr>
-inoremap <silent><expr> <C-j>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1): "\<C-j>"
+inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -313,7 +311,7 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " git diff
 nnoremap <silent> <leader>d :Git<cr>
 nnoremap <F2> :Git blame<cr>
-nnoremap <F3> :CocDiagnostics<cr>
+nnoremap <F3> :Vista!!<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
 nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
@@ -330,6 +328,23 @@ nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 nnoremap <Leader>g :Ack!<Space>
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'ctags'
+let g:vista_executive_for = {
+      \ 'javascript': 'coc',
+      \ 'typescript': 'coc',
+      \ }
+let g:vista_ctags_cmd = {
+      \ 'haskell': 'hasktags -x -o - -c',
+      \ }
+let g:vista_fzf_preview = ['right:50%']
+let g:vista#renderer#enable_icon = 1
+let g:vista#renderer#icons = {
+      \   "function": "\uf794",
+      \   "variable": "\uf71b",
+      \  }
 
 " insert mode 光标为竖线
 if exists('$TMUX')
