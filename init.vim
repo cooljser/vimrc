@@ -8,8 +8,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'rafi/awesome-vim-colorschemes'
 
 " ========= programming tools here. ==========
-" Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
 " Plug 'github/copilot.vim'
@@ -44,10 +44,11 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'eliba2/vim-node-inspect'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'yggdroot/indentline'
-Plug 'rlue/vim-barbaric'
+" Plug 'rlue/vim-barbaric'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vista.vim'
+" Plug 'aserowy/tmux.nvim'
 
 call plug#end()
 
@@ -138,6 +139,8 @@ set wildmenu
 filetype plugin on
 filetype indent on
 
+set backupcopy=yes
+
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
@@ -174,17 +177,6 @@ lua require('gitsigns').setup { current_line_blame = true, current_line_blame_op
 " 剪切板同步
 set clipboard=unnamed
 
-let g:onedark_terminal_italics=0
-let g:onedark_termcolors=16
-colorscheme onedark 
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
-hi Normal guibg=NONE ctermbg=NONE
-" let g:gruvbox_contrast_dark='middle'
-" let g:gruvbox_termcolors=16
-" let g:gruvbox_bold=0
-" let g:gruvbox_transparent_bg=1
-" colorscheme gruvbox
-
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -211,6 +203,8 @@ func! CompileRunGcc()
         exec '!java %<'
     elseif &filetype == 'sh'
         :!time bash %
+    elseif &filetype == 'python'
+      exec '!python3 %'
     endif
 endfunc
 
@@ -269,10 +263,19 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm(): "\<Tab>"
+" Use <Tab> and <S-Tab> to navigate the completion list
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+" inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm(): "\<Tab>"
 " remap for complete to use tab and <cr>
-inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1): "\<C-j>"
-inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1): "\<C-j>"
+" inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -326,10 +329,12 @@ nnoremap <C-f> :GFiles<CR>
 nnoremap <A-f> :Files<CR>
 nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 nnoremap <Leader>g :Ack!<Space>
+" fix coc float window not disppear bug
+inoremap <C-c> <ESC>
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'ctags'
 let g:vista_executive_for = {
@@ -421,7 +426,7 @@ autocmd TermEnter term://*toggleterm#*
 nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm size=20 direction='float'"<CR>
 
 " onedark color
-hi! CursorWord guibg=#484b4d ctermbg=223
+" hi! CursorWord guibg=#484b4d ctermbg=223
 " hi! CursorWord guibg=#86786b ctermbg=223
 
 " ignore nerdtree when open session 
@@ -450,10 +455,30 @@ set signcolumn=yes
 set completeopt=menu,menuone,noselect
 
 " 进入insert模式后，自动恢复上次使用的输入法
-let g:barbaric_ime = 'macos'
-let g:barbaric_default = 0
-let g:barbaric_scope = 'buffer'
-let g:barbaric_timeout = -1
+" let g:barbaric_ime = 'macos'
+" let g:barbaric_default = 0
+" let g:barbaric_scope = 'buffer'
+" let g:barbaric_timeout = -1
 
 " 解决 coc-references 关闭后 cursor 消失的问题
 let g:coc_disable_transparent_cursor = 1
+
+let g:onedark_terminal_italics=0
+let g:onedark_termcolors=16
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
+hi Normal guibg=NONE ctermbg=NONE
+colorscheme onedark 
+" let g:gruvbox_contrast_dark='middle'
+" let g:gruvbox_termcolors=16
+" let g:gruvbox_bold=0
+" let g:gruvbox_transparent_bg=1
+" colorscheme gruvbox
+
+if has("termguicolors")
+  " fix bug for vim
+  set t_8f=[38;2;%lu;%lu;%lum
+  set t_8b=[48;2;%lu;%lu;%lum
+
+  " enable true color
+  set termguicolors
+endif
