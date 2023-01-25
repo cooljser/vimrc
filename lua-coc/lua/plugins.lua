@@ -38,6 +38,7 @@ packer.startup(function(use)
 	-- Syntax Highlighting and Colors --
 	use('ap/vim-css-color')
 	use('leafgarland/typescript-vim')
+	use('peitalin/vim-jsx-typescript')
 	-- Colorschemes -
 	use('navarasu/onedark.nvim')
 	-- hop --

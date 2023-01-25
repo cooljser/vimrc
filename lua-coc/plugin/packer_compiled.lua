@@ -202,6 +202,11 @@ _G.packer_plugins = {
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
     url = "https://github.com/airblade/vim-gitgutter"
   },
+  ["vim-jsx-typescript"] = {
+    loaded = true,
+    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-jsx-typescript",
+    url = "https://github.com/peitalin/vim-jsx-typescript"
+  },
   ["vim-matchtag"] = {
     loaded = true,
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-matchtag",

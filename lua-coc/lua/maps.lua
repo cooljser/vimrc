@@ -13,7 +13,7 @@ local function map(m, k, v)
 end
 
 -- Basic map
-map("n", "qq", "<CMD>q<CR>")
+map("n", "qq", "<CMD>q!<CR>")
 map("n", "<leader><cr>", "<CMD>noh<CR>")
 map("n", "<leader>j", "<CMD>HopWord<CR>")
 map("n", "<leader>w", "<CMD>wa<CR>")
