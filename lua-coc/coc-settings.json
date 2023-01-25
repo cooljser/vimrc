@@ -1,0 +1,34 @@
+{
+  "imselect.defaultInput": "com.apple.keylayout.ABC",
+  "diagnostic.enable": true,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.messageDelay": 200,
+  "diagnostic.refreshOnInsertMode": false,
+  "suggest.maxCompleteItemCount": 20,
+  "suggest.removeDuplicateItems": true,
+   "eslint.autoFixOnSave": true,
+  "eslint.filetypes": ["javascript", "typescript", "javascriptreact", "typescriptreact", "less", "css"],
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ],
+  "eslint.quiet": true,
+  "emmet.includeLanguages": {"javascript": "javascriptreact"},
+  "prettier.bracketSpacing": false,
+  "prettier.arrowParens": "always",
+  "prettier.singleQuote": true,
+  "prettier.printWidth": 120,
+  "prettier.jsxSingleQuote": true,
+  "prettier.trailingComma": "none",
+  "prettier.semi": true, 
+  "prettier.tabWidth": 2,
+  "cSpell.enabled": false,
+  "cSpell.userWords": [
+    "RECENTLYUSED"
+  ],
+  "tsserver.implicitProjectConfig.experimentalDecorators": true,
+  "tsserver.implicitProjectConfig.checkJs": true
+}
