@@ -27,7 +27,7 @@ packer.startup(function(use)
 		tag = '0.1.0',
 		requires = { { 'nvim-lua/plenary.nvim' } },
 	})
-	use('nvim-telescope/telescope-file-browser.nvim')
+	-- use('nvim-treesitter/nvim-treesitter')
 	use('airblade/vim-rooter')
 	use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } } -- A better statusline
 	-- File management --
@@ -52,14 +52,20 @@ packer.startup(function(use)
 	}
 	use('akinsho/toggleterm.nvim')
 	use('neoclide/coc.nvim')
-	use('jiangmiao/auto-pairs')
 	use('sheerun/vim-polyglot')
 	use('tpope/vim-fugitive')
 	use('airblade/vim-gitgutter')
 	use('nvim-lua/plenary.nvim')
 	use('lewis6991/gitsigns.nvim')
 	use('preservim/nerdcommenter')
-	use('leafOfTree/vim-matchtag')
+	-- matchtag 会导致高亮异常
+	-- use('leafOfTree/vim-matchtag')
+	-- use('jiangmiao/auto-pairs')
+	use('andymass/vim-matchup')
+	use {
+		"windwp/nvim-autopairs",
+		config = function() require("nvim-autopairs").setup {} end
+	}
 	use('yggdroot/indentline')
 	use('rafi/awesome-vim-colorschemes')
 	use('xolox/vim-misc')
@@ -69,10 +75,6 @@ packer.startup(function(use)
 	use('SirVer/ultisnips')
 	use('honza/vim-snippets')
 	use('kdheepak/lazygit.nvim')
-	use {
-		's1n7ax/nvim-search-and-replace',
-		config = function() require'nvim-search-and-replace'.setup() end,
-	}
 	use('mileszs/ack.vim')
 
 	if packer_bootstrap then

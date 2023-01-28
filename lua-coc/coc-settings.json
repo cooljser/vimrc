@@ -6,7 +6,7 @@
   "diagnostic.refreshOnInsertMode": false,
   "suggest.maxCompleteItemCount": 20,
   "suggest.removeDuplicateItems": true,
-   "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": true,
   "eslint.filetypes": ["javascript", "typescript", "javascriptreact", "typescriptreact", "less", "css"],
   "eslint.probe": [
     "javascript",
@@ -30,5 +30,6 @@
     "RECENTLYUSED"
   ],
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
-  "tsserver.implicitProjectConfig.checkJs": true
+  "tsserver.implicitProjectConfig.checkJs": true,
+  "emmet.priority": 1
 }
