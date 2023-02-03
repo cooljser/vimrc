@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 " ========= apperance here. ==========
 Plug 'joshdick/onedark.vim'
 Plug 'rafi/awesome-vim-colorschemes'
+Plug 'folke/tokyonight.nvim'
 
 " ========= programming tools here. ==========
 Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
@@ -26,6 +27,7 @@ Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf.vim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
@@ -44,11 +46,9 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'eliba2/vim-node-inspect'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'yggdroot/indentline'
-" Plug 'rlue/vim-barbaric'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vista.vim'
-" Plug 'aserowy/tmux.nvim'
 
 call plug#end()
 
@@ -317,7 +317,11 @@ nnoremap <F2> :Git blame<cr>
 nnoremap <F3> :Vista!!<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
-nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
+" nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fw <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 noremap H ^
 noremap L $
 noremap M %
@@ -331,6 +335,9 @@ nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 nnoremap <Leader>g :Ack!<Space>
 " fix coc float window not disppear bug
 inoremap <C-c> <ESC>
+" quickly console.log
+" https://vi.stackexchange.com/questions/21894/how-to-insert-a-console-log-for-word-under-cursor-in-new-line
+nnoremap <leader>l "ayiwoconsole.log('<C-R>a:', <C-R>a);<Esc>
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
@@ -425,10 +432,6 @@ autocmd TermEnter term://*toggleterm#*
       \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm size=20 direction='float'"<CR>
 
-" onedark color
-" hi! CursorWord guibg=#484b4d ctermbg=223
-" hi! CursorWord guibg=#86786b ctermbg=223
-
 " ignore nerdtree when open session 
 set sessionoptions-=blank
 
@@ -465,8 +468,8 @@ let g:coc_disable_transparent_cursor = 1
 
 let g:onedark_terminal_italics=0
 let g:onedark_termcolors=16
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
-hi Normal guibg=NONE ctermbg=NONE
+" autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
+" hi Normal guibg=NONE ctermbg=NONE
 colorscheme onedark 
 " let g:gruvbox_contrast_dark='middle'
 " let g:gruvbox_termcolors=16
@@ -482,3 +485,5 @@ if has("termguicolors")
   " enable true color
   set termguicolors
 endif
+
+hi! default CursorWord guibg=#484b4d ctermbg=223
