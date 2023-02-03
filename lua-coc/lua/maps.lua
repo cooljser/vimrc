@@ -24,7 +24,9 @@ map("n", "<leader>3", "3gt<CR>")
 map("n", "<leader>ev", "<CMD>:vs ~/.config/nvim<CR>")
 map("n", "<leader>r", "<CMD>e!<CR>")
 map("n", "H", "^")
+map("n", "dh", "d^")
 map("n", "L", "$")
+map("n", "dl", "d$")
 map("n", "M", "%")
 
 -- Mimic shell movements
@@ -39,8 +41,8 @@ map("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>")
 map("n", "<C-f>", "<CMD>Telescope find_files<CR>")
 map("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
-map("n", "<leader>h", "<CMD>Telescope git_commits<CR>")
-map("n", "<leader>ch", "<CMD>Telescope git_bcommits<CR>")
+map("n", "<leader>h", "<CMD>LazyGitFilter<CR>")
+map("n", "<leader>ch", "<CMD>LazyGitFilterCurrentFile<CR>")
 
 -- NerdTree
 map("n", "<leader>nn", "<CMD>NERDTreeToggle<CR>")
@@ -69,6 +71,9 @@ map("n", "<leader>p", "<CMD>Prettier<CR>")
 
 -- Run javascript
 map("n", "<F5>", "<CMD>!node %<CR>")
+map("n", "<F2>", "<CMD>Git blame<CR>")
+
+map("n", "<Space>r", "<CMD>resize 60<CR>")
 
 -- 插件快捷键
 local pluginKeys = {}

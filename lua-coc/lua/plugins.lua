@@ -58,14 +58,6 @@ packer.startup(function(use)
 	use('nvim-lua/plenary.nvim')
 	use('lewis6991/gitsigns.nvim')
 	use('preservim/nerdcommenter')
-	-- matchtag 会导致高亮异常
-	-- use('leafOfTree/vim-matchtag')
-	-- use('jiangmiao/auto-pairs')
-	use('andymass/vim-matchup')
-	use {
-		"windwp/nvim-autopairs",
-		config = function() require("nvim-autopairs").setup {} end
-	}
 	use('yggdroot/indentline')
 	use('rafi/awesome-vim-colorschemes')
 	use('xolox/vim-misc')
