@@ -2,7 +2,7 @@
   "imselect.defaultInput": "com.apple.keylayout.ABC",
   "diagnostic.enable": true,
   "diagnostic.checkCurrentLine": true,
-  "diagnostic.messageDelay": 200,
+  "diagnostic.messageDelay": 500,
   "diagnostic.refreshOnInsertMode": false,
   "suggest.maxCompleteItemCount": 20,
   "suggest.removeDuplicateItems": true,
@@ -45,5 +45,5 @@
     "RECENTLYUSED"
   ],
 	"tsserver.implicitProjectConfig.experimentalDecorators": true,
-	"tsserver.implicitProjectConfig.checkJs": true
+	"tsserver.implicitProjectConfig.checkJs": true,
 }

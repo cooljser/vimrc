@@ -9,15 +9,15 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'folke/tokyonight.nvim'
 
 " ========= programming tools here. ==========
-Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
 " Plug 'github/copilot.vim'
 Plug 'ap/vim-css-color', {'for': ['css', 'less']}
 
 " ========= syntax support here. ==========
-Plug 'groenewege/vim-less', {'for': ['less']}
+" Plug 'groenewege/vim-less', {'for': ['less']}
 Plug 'peitalin/vim-jsx-typescript', {'for': ['javascript.jsx', 'javascript.tsx']}
 Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
 Plug 'sheerun/vim-polyglot'
@@ -264,18 +264,19 @@ if has("mac") || has("macunix")
 endif
 
 " Use <Tab> and <S-Tab> to navigate the completion list
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
-" inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm(): "\<Tab>"
+" inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
+                              " \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<Tab>"
 " remap for complete to use tab and <cr>
-" inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1): "\<C-j>"
-" inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1): "\<C-j>"
+inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -322,6 +323,7 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fw <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>m <cmd>Telescope marks<cr>
 noremap H ^
 noremap L $
 noremap M %
