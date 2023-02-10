@@ -13,7 +13,7 @@ Plug 'folke/tokyonight.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 Plug 'ap/vim-css-color', {'for': ['css', 'less']}
 
 " ========= syntax support here. ==========
@@ -34,7 +34,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'leafOfTree/vim-matchtag'
 Plug 'phaazon/hop.nvim'
@@ -263,22 +263,16 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-" Use <Tab> and <S-Tab> to navigate the completion list
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+
+inoremap <silent><expr> <C-j>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
+inoremap <expr><C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<TAB>"
 
-" inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
-                              " \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<Tab>"
-" remap for complete to use tab and <cr>
-inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1): "\<C-j>"
-inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
