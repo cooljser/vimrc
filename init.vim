@@ -4,13 +4,14 @@ let g:polyglot_disabled = ['markdown', 'vue']
 
 call plug#begin('~/.vim/plugged')
 " ========= apperance here. ==========
-Plug 'joshdick/onedark.vim'
+Plug 'navarasu/onedark.nvim'
+Plug 'tomasiser/vim-code-dark'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'folke/tokyonight.nvim'
 
 " ========= programming tools here. ==========
 " Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'tag': 'v0.0.81'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
 Plug 'github/copilot.vim'
@@ -34,7 +35,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'leafOfTree/vim-matchtag'
 Plug 'phaazon/hop.nvim'
@@ -49,12 +50,14 @@ Plug 'yggdroot/indentline'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vista.vim'
+Plug 'sindrets/diffview.nvim'
 
 call plug#end()
 
-let mapleader = ","
+let mapleader = " "
 " Fast saving
 nmap <leader>w :wa<cr>
+nmap <C-s> :wa<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -212,7 +215,7 @@ endfunc
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
+" map <space> /
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -269,11 +272,21 @@ inoremap <silent><expr> <C-j>
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<TAB>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use <Tab> and <S-Tab> to navigate the completion list
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <silent><expr> <TAB>
+      " \ pumvisible() ? coc#_select_confirm() :
+      " \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      " \ <SID>check_back_space() ? "\<TAB>" :
+      " \ coc#refresh()
 
 function! CheckBackspace() abort
   let col = col('.') - 1
+  print(1)
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
@@ -298,16 +311,18 @@ nmap <leader>qf <Plug>(coc-fix-current)
 nnoremap <leader>r :e!<CR>
 " Close buffer
 nnoremap qq :q<CR>
+nnoremap <leader>qq :qa!<CR>
 " Source vim config
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<CR>
 " open commit history 
-nnoremap <leader>h :Commits<CR>
+nnoremap <leader>h :DiffviewFileHistory<CR>
 " open current file history`
-nnoremap <leader>ch :BCommits<CR>
+nnoremap <leader>ch :DiffviewFileHistory %<CR>
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 " git diff
-nnoremap <silent> <leader>d :Git<cr>
+nnoremap <silent> <leader>gd :DiffviewOpen<cr>
+nnoremap <silent> <leader>gc :DiffviewClose<cr>
 nnoremap <F2> :Git blame<cr>
 nnoremap <F3> :Vista!!<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
@@ -328,7 +343,7 @@ noremap <leader>3 3gt
 nnoremap <C-f> :GFiles<CR>
 nnoremap <A-f> :Files<CR>
 nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
-nnoremap <Leader>g :Ack!<Space>
+nnoremap <Leader>gs :Ack!<Space>
 " fix coc float window not disppear bug
 inoremap <C-c> <ESC>
 " quickly console.log
@@ -483,3 +498,6 @@ if has("termguicolors")
 endif
 
 hi! default CursorWord guibg=#484b4d ctermbg=223
+
+" diff view
+lua require("diffview").setup({ use_icons = false })

@@ -46,4 +46,5 @@
   ],
 	"tsserver.implicitProjectConfig.experimentalDecorators": true,
 	"tsserver.implicitProjectConfig.checkJs": true,
+ "yank.priority": 1,
 }
