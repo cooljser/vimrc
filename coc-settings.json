@@ -21,15 +21,8 @@
   "hover.floatConfig": {
     "highlight": "null"
   },
+  // "coc.preferences.formatOnSave": true,
   "eslint.autoFixOnSave": true,
-  "eslint.filetypes": ["javascript", "typescript", "javascriptreact", "typescriptreact", "less", "css"],
-  "eslint.probe": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue"
-  ],
   "eslint.quiet": true,
   "emmet.includeLanguages": {"javascript": "javascriptreact"},
   "prettier.bracketSpacing": false,
@@ -38,13 +31,11 @@
   "prettier.printWidth": 120,
   "prettier.jsxSingleQuote": true,
   "prettier.trailingComma": "none",
-  "prettier.semi": true, 
+  "prettier.semi": true,
   "prettier.tabWidth": 2,
   "cSpell.enabled": false,
-  "cSpell.userWords": [
-    "RECENTLYUSED"
-  ],
-	"tsserver.implicitProjectConfig.experimentalDecorators": true,
-	"tsserver.implicitProjectConfig.checkJs": true,
- "yank.priority": 1,
+  "cSpell.userWords": ["RECENTLYUSED"],
+  "tsserver.implicitProjectConfig.experimentalDecorators": true,
+  "tsserver.implicitProjectConfig.checkJs": true,
+  "yank.priority": 1
 }

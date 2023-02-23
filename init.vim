@@ -1,3 +1,4 @@
+" https://github.com/neoclide/coc-eslint/issues/81 (解决没有 eslint 的项目保存时保存问题)
 " https://github.com/sheerun/vim-polyglot/issues/741
 let g:vue_pre_processors = []
 let g:polyglot_disabled = ['markdown', 'vue']
@@ -11,14 +12,12 @@ Plug 'rafi/awesome-vim-colorschemes'
 " ========= programming tools here. ==========
 " Plug 'neoclide/coc.nvim', {'commit': '0fd56dd25fc36606afe2290240aecb6e6ab85092'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neoclide/coc.nvim', {'tag': 'v0.0.81'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 Plug 'ap/vim-css-color', {'for': ['css', 'less']}
 
 " ========= syntax support here. ==========
-" Plug 'groenewege/vim-less', {'for': ['less']}
 Plug 'peitalin/vim-jsx-typescript', {'for': ['javascript.jsx', 'javascript.tsx']}
 Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
 Plug 'sheerun/vim-polyglot'
@@ -35,9 +34,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'leafOfTree/vim-matchtag'
 Plug 'phaazon/hop.nvim'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'xiyaowong/nvim-cursorword', { 'commit': '338d4f7de49ef654caf45beb86733a786943f933' }
@@ -51,6 +49,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'liuchengxu/vista.vim'
 Plug 'sindrets/diffview.nvim'
+Plug 'folke/which-key.nvim'
 
 call plug#end()
 
@@ -169,13 +168,10 @@ set updatetime=300
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 let g:mkdp_refresh_slow = 1
-let g:vim_matchtag_enable_by_default = 1
-" html match tag
-let g:vim_matchtag_files = '*.html'
-let g:vim_matchtag_highlight_cursor_on = 1
 
 lua require'hop'.setup { keys = 'etovxqpdygfblzhckisuran', jump_on_sole_occurrence = false }
 lua require('gitsigns').setup { current_line_blame = true, current_line_blame_opts = { delay = 1000 } }
+lua require("which-key").setup {}
 
 " 剪切板同步
 set clipboard=unnamed
@@ -290,8 +286,6 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" cancel highlight
-nnoremap <CR> :noh<CR><CR>
 " vim-session 配置
 nnoremap <leader>so :OpenSession
 nnoremap <leader>ss :SaveSession
@@ -327,7 +321,6 @@ nnoremap <F2> :Git blame<cr>
 nnoremap <F3> :Vista!!<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
-" nnoremap <leader>f :CocCommand eslint.executeAutofix<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fw <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
@@ -337,6 +330,8 @@ noremap H ^
 noremap L $
 noremap M %
 " imap jj <Esc>
+inoremap jk <esc>
+inoremap kj <esc>
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
@@ -345,7 +340,7 @@ nnoremap <A-f> :Files<CR>
 nnoremap <silent> <Leader>a :Ag <C-R><C-W><CR>
 nnoremap <Leader>gs :Ack!<Space>
 " fix coc float window not disppear bug
-inoremap <C-c> <ESC>
+" inoremap <C-c> <ESC>
 " quickly console.log
 " https://vi.stackexchange.com/questions/21894/how-to-insert-a-console-log-for-word-under-cursor-in-new-line
 nnoremap <leader>l "ayiwoconsole.log('<C-R>a:', <C-R>a);<Esc>
@@ -381,14 +376,6 @@ endif
 let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
 let g:session_default_to_last = 1
-
-" 禁止自动注释到新一行
-augroup Format-Options
-    autocmd!
-    autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-    " This can be done as well instead of the previous line, for setting formatoptions as you choose:
-    autocmd BufEnter * setlocal formatoptions=crqn2l1j
-augroup END
 
 """"""""""""""""""""""""""""""
 " => YankStack
@@ -501,3 +488,4 @@ hi! default CursorWord guibg=#484b4d ctermbg=223
 
 " diff view
 lua require("diffview").setup({ use_icons = false })
+
