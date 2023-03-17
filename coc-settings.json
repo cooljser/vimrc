@@ -6,22 +6,25 @@
   "diagnostic.refreshOnInsertMode": false,
   "suggest.maxCompleteItemCount": 20,
   "suggest.removeDuplicateItems": true,
-  "suggest.floatConfig": {
-    "highlight": "null"
-  },
-  "floatFactory.floatConfig": {
-    "highlight": "null"
-  },
-  "diagnostic.floatConfig": {
-    "highlight": "null"
-  },
-  "signature.floatConfig": {
-    "highlight": "null"
-  },
-  "hover.floatConfig": {
-    "highlight": "null"
-  },
-  // "coc.preferences.formatOnSave": true,
+  "suggest.timeout": 500,
+  "signature.triggerSignatureWait": 200,
+  // "suggest.filterOnBackspace": false,
+  // "suggest.insertMode": "insert",
+  // "suggest.floatConfig": {
+    // "highlight": "null"
+  // },
+  // "floatFactory.floatConfig": {
+    // "highlight": "null"
+  // },
+  // "diagnostic.floatConfig": {
+    // "highlight": "null"
+  // },
+  // "signature.floatConfig": {
+    // "highlight": "null"
+  // },
+  // "hover.floatConfig": {
+    // "highlight": "null"
+  // },
   "eslint.autoFixOnSave": true,
   "eslint.quiet": true,
   "emmet.includeLanguages": {"javascript": "javascriptreact"},
@@ -33,9 +36,8 @@
   "prettier.trailingComma": "none",
   "prettier.semi": true,
   "prettier.tabWidth": 2,
-  "cSpell.enabled": false,
-  "cSpell.userWords": ["RECENTLYUSED"],
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "tsserver.implicitProjectConfig.checkJs": true,
+  "tsserver.log": "verbose",
   "yank.priority": 1
 }

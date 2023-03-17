@@ -47,9 +47,9 @@ Plug 'kdheepak/lazygit.nvim'
 Plug 'yggdroot/indentline'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 Plug 'sindrets/diffview.nvim'
-Plug 'folke/which-key.nvim'
+" Plug 'folke/which-key.nvim'
 
 call plug#end()
 
@@ -164,14 +164,15 @@ let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 't
 let g:NERDSpaceDelims = 1
 " 默认开启 gitgutter
 let g:gitgutter_enabled = 1
-set updatetime=300
+set updatetime=50
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 let g:mkdp_refresh_slow = 1
 
 lua require'hop'.setup { keys = 'etovxqpdygfblzhckisuran', jump_on_sole_occurrence = false }
 lua require('gitsigns').setup { current_line_blame = true, current_line_blame_opts = { delay = 1000 } }
-lua require("which-key").setup {}
+lua require("toggleterm").setup()
+" lua require("which-key").setup {}
 
 " 剪切板同步
 set clipboard=unnamed
@@ -318,7 +319,7 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> <leader>gd :DiffviewOpen<cr>
 nnoremap <silent> <leader>gc :DiffviewClose<cr>
 nnoremap <F2> :Git blame<cr>
-nnoremap <F3> :Vista!!<cr>
+" nnoremap <F3> :Vista!!<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -330,8 +331,6 @@ noremap H ^
 noremap L $
 noremap M %
 " imap jj <Esc>
-inoremap jk <esc>
-inoremap kj <esc>
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
@@ -348,21 +347,21 @@ nnoremap <leader>l "ayiwoconsole.log('<C-R>a:', <C-R>a);<Esc>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'ctags'
-let g:vista_executive_for = {
-      \ 'javascript': 'coc',
-      \ 'typescript': 'coc',
-      \ }
-let g:vista_ctags_cmd = {
-      \ 'haskell': 'hasktags -x -o - -c',
-      \ }
-let g:vista_fzf_preview = ['right:50%']
-let g:vista#renderer#enable_icon = 1
-let g:vista#renderer#icons = {
-      \   "function": "\uf794",
-      \   "variable": "\uf71b",
-      \  }
+" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+" let g:vista_default_executive = 'ctags'
+" let g:vista_executive_for = {
+      " \ 'javascript': 'coc',
+      " \ 'typescript': 'coc',
+      " \ }
+" let g:vista_ctags_cmd = {
+      " \ 'haskell': 'hasktags -x -o - -c',
+      " \ }
+" let g:vista_fzf_preview = ['right:50%']
+" let g:vista#renderer#enable_icon = 1
+" let g:vista#renderer#icons = {
+      " \   "function": "\uf794",
+      " \   "variable": "\uf71b",
+      " \  }
 
 " insert mode 光标为竖线
 if exists('$TMUX')
@@ -463,17 +462,11 @@ set completeopt=menu,menuone,noselect
 
 " 解决 coc-references 关闭后 cursor 消失的问题
 let g:coc_disable_transparent_cursor = 1
-
 let g:onedark_terminal_italics=0
 let g:onedark_termcolors=16
 " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 " hi Normal guibg=NONE ctermbg=NONE
 colorscheme onedark 
-" let g:gruvbox_contrast_dark='middle'
-" let g:gruvbox_termcolors=16
-" let g:gruvbox_bold=0
-" let g:gruvbox_transparent_bg=1
-" colorscheme gruvbox
 
 if has("termguicolors")
   " fix bug for vim
@@ -485,7 +478,7 @@ if has("termguicolors")
 endif
 
 hi! default CursorWord guibg=#484b4d ctermbg=223
+let g:cursorword_min_width = 1
 
 " diff view
 lua require("diffview").setup({ use_icons = false })
-
