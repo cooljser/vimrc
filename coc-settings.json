@@ -7,7 +7,9 @@
   "suggest.maxCompleteItemCount": 20,
   "suggest.removeDuplicateItems": true,
   "suggest.timeout": 500,
+  "suggest.enableFloat": false,
   "signature.triggerSignatureWait": 200,
+  "signature.enable": false,
   // "suggest.filterOnBackspace": false,
   // "suggest.insertMode": "insert",
   // "suggest.floatConfig": {
@@ -38,6 +40,5 @@
   "prettier.tabWidth": 2,
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "tsserver.implicitProjectConfig.checkJs": true,
-  "tsserver.log": "verbose",
-  "yank.priority": 1
+  "yank.priority": 1,
 }

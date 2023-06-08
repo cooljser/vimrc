@@ -14,8 +14,9 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 Plug 'ap/vim-css-color', {'for': ['css', 'less']}
+Plug 'groenewege/vim-less'
 
 " ========= syntax support here. ==========
 Plug 'peitalin/vim-jsx-typescript', {'for': ['javascript.jsx', 'javascript.tsx']}
@@ -34,7 +35,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'phaazon/hop.nvim'
 Plug 'akinsho/toggleterm.nvim'
@@ -43,13 +44,13 @@ Plug 'dstein64/vim-startuptime'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'eliba2/vim-node-inspect'
-Plug 'kdheepak/lazygit.nvim'
+" Plug 'kdheepak/lazygit.nvim'
 Plug 'yggdroot/indentline'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-" Plug 'liuchengxu/vista.vim'
 Plug 'sindrets/diffview.nvim'
-" Plug 'folke/which-key.nvim'
+Plug 'akinsho/git-conflict.nvim'
+Plug 'folke/todo-comments.nvim'
 
 call plug#end()
 
@@ -162,6 +163,8 @@ endif
 let g:coc_filetype_map = ['javascriptreact', 'typescriptreact', 'javascript', 'typescript', 'javascript.typescript', 'css', 'less']
 " nerdcommenter
 let g:NERDSpaceDelims = 1
+" 禁用自动注释下一行
+" autocmd FileType * setlocal formatoptions-=cro
 " 默认开启 gitgutter
 let g:gitgutter_enabled = 1
 set updatetime=50
@@ -231,7 +234,7 @@ map <leader>tn :tabnew<cr>
 map <leader>b :Buffers<cr>
 
 map <leader>j :HopWord<cr>
-nnoremap <silent> <leader>t :LazyGit<CR>
+" nnoremap <silent> <leader>t :LazyGit<CR>
 
 " Specify the behavior when switching between buffers
 try
@@ -316,16 +319,18 @@ nnoremap <leader>ch :DiffviewFileHistory %<CR>
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 " git diff
+nnoremap <silent> <leader>d :Git<cr>
 nnoremap <silent> <leader>gd :DiffviewOpen<cr>
 nnoremap <silent> <leader>gc :DiffviewClose<cr>
 nnoremap <F2> :Git blame<cr>
-" nnoremap <F3> :Vista!!<cr>
+nnoremap <F3> :CocOutline<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fw <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>ft <cmd>TodoTelescope<cr>
 nnoremap <leader>m <cmd>Telescope marks<cr>
 noremap H ^
 noremap L $
@@ -345,23 +350,6 @@ nnoremap <Leader>gs :Ack!<Space>
 nnoremap <leader>l "ayiwoconsole.log('<C-R>a:', <C-R>a);<Esc>
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-" let g:vista_default_executive = 'ctags'
-" let g:vista_executive_for = {
-      " \ 'javascript': 'coc',
-      " \ 'typescript': 'coc',
-      " \ }
-" let g:vista_ctags_cmd = {
-      " \ 'haskell': 'hasktags -x -o - -c',
-      " \ }
-" let g:vista_fzf_preview = ['right:50%']
-" let g:vista#renderer#enable_icon = 1
-" let g:vista#renderer#icons = {
-      " \   "function": "\uf794",
-      " \   "variable": "\uf71b",
-      " \  }
 
 " insert mode 光标为竖线
 if exists('$TMUX')
@@ -394,6 +382,7 @@ let g:NERDTreeWinSize=35
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => lightline
@@ -465,20 +454,28 @@ let g:coc_disable_transparent_cursor = 1
 let g:onedark_terminal_italics=0
 let g:onedark_termcolors=16
 " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
-" hi Normal guibg=NONE ctermbg=NONE
-colorscheme onedark 
+hi Normal guibg=NONE ctermbg=NONE
+colorscheme onehalflight
+hi! default CursorWord guibg=#b4dbfd ctermbg=223
+" colorscheme onedark
 
 if has("termguicolors")
   " fix bug for vim
-  set t_8f=[38;2;%lu;%lu;%lum
-  set t_8b=[48;2;%lu;%lu;%lum
+  set t_8f=[38;2;%lu;%lu;%lum
+  set t_8b=[48;2;%lu;%lu;%lum
 
   " enable true color
   set termguicolors
 endif
 
-hi! default CursorWord guibg=#484b4d ctermbg=223
+" hi! default CursorWord guibg=#484b4d ctermbg=223
 let g:cursorword_min_width = 1
 
-" diff view
-lua require("diffview").setup({ use_icons = false })
+" let g:coc_disable_uncaught_error = 1
+
+lua << EOF
+  require("todo-comments").setup {}
+  require('git-conflict').setup()
+  require("diffview").setup({ use_icons = false })
+EOF
+
