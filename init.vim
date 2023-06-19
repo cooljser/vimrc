@@ -29,6 +29,7 @@ Plug 'xolox/vim-misc'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/fzf.vim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'preservim/nerdtree'
 Plug 'airblade/vim-gitgutter'
@@ -327,7 +328,7 @@ nnoremap <F3> :CocOutline<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fw <cmd>Telescope live_grep<cr>
+nnoremap <leader>fw <cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>ft <cmd>TodoTelescope<cr>
@@ -377,7 +378,7 @@ nmap <C-n> <Plug>yankstack_substitute_newer_paste
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=0
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+let NERDTreeIgnore = ['\.pyc$', '__pycache__', 'node_modules']
 let g:NERDTreeWinSize=35
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
@@ -477,5 +478,25 @@ lua << EOF
   require("todo-comments").setup {}
   require('git-conflict').setup()
   require("diffview").setup({ use_icons = false })
+  require("telescope").load_extension("live_grep_args")
+  local lga_actions = require("telescope-live-grep-args.actions")
+  require "telescope".setup {
+    extensions = {
+      live_grep_args = {
+        auto_quoting = true, -- enable/disable auto-quoting
+        mappings = { -- extend mappings
+          i = {
+            ["<C-k>"] = lga_actions.quote_prompt(),
+            ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+          },
+        }
+      }
+    },
+    pickers = {
+      colorscheme = {
+        enable_preview = true
+      }
+    }
+  }
 EOF
 
