@@ -1,4 +1,6 @@
 # Neovim Config 
+Neovim config for frontend developes
+
 ## Snapshot
 ![](https://cooljser-image.oss-cn-shanghai.aliyuncs.com/20230619162333.png)
 ![](https://cooljser-image.oss-cn-shanghai.aliyuncs.com/20230619162403.png)
