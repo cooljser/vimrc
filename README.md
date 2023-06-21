@@ -1,5 +1,5 @@
 # Neovim Config 
-Neovim config for frontend developes
+Neovim config for web frontend developes
 
 ## Snapshot
 ![](https://cooljser-image.oss-cn-shanghai.aliyuncs.com/20230619162333.png)
