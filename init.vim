@@ -16,7 +16,7 @@ Plug 'mattn/emmet-vim', {'for': ['html', 'javascript.jsx']}
 Plug 'preservim/nerdcommenter'
 Plug 'github/copilot.vim'
 Plug 'ap/vim-css-color', {'for': ['css', 'less']}
-Plug 'groenewege/vim-less'
+" Plug 'groenewege/vim-less'
 
 " ========= syntax support here. ==========
 Plug 'peitalin/vim-jsx-typescript', {'for': ['javascript.jsx', 'javascript.tsx']}
@@ -45,7 +45,6 @@ Plug 'dstein64/vim-startuptime'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'eliba2/vim-node-inspect'
-" Plug 'kdheepak/lazygit.nvim'
 Plug 'yggdroot/indentline'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -444,21 +443,15 @@ set signcolumn=yes
 
 set completeopt=menu,menuone,noselect
 
-" 进入insert模式后，自动恢复上次使用的输入法
-" let g:barbaric_ime = 'macos'
-" let g:barbaric_default = 0
-" let g:barbaric_scope = 'buffer'
-" let g:barbaric_timeout = -1
-
 " 解决 coc-references 关闭后 cursor 消失的问题
 let g:coc_disable_transparent_cursor = 1
 let g:onedark_terminal_italics=0
 let g:onedark_termcolors=16
 " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 hi Normal guibg=NONE ctermbg=NONE
-colorscheme onehalflight
-hi! default CursorWord guibg=#b4dbfd ctermbg=223
-" colorscheme onedark
+" colorscheme onehalflight
+" hi! default CursorWord guibg=#b4dbfd ctermbg=223
+colorscheme onedark
 
 if has("termguicolors")
   " fix bug for vim
@@ -469,7 +462,7 @@ if has("termguicolors")
   set termguicolors
 endif
 
-" hi! default CursorWord guibg=#484b4d ctermbg=223
+hi! default CursorWord guibg=#484b4d ctermbg=223
 let g:cursorword_min_width = 1
 
 " let g:coc_disable_uncaught_error = 1
