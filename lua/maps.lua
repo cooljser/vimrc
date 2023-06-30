@@ -45,9 +45,9 @@ map("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
 map("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
 map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
 
--- NerdTree
-map("n", "<leader>nn", "<CMD>NERDTreeToggle<CR>")
-map("n", "<leader>nf", "<CMD>NERDTreeFind<CR>")
+-- NvimTree
+map("n", "<leader>nn", "<CMD>NvimTreeToggle<CR>")
+map("n", "<leader>nf", "<CMD>NvimTreeFindFile<CR>")
 
 -- Smart way to move between windows
 map("n", "<C-j>", "<C-W>j")

@@ -36,7 +36,7 @@ packer.startup(function(use)
 	use('airblade/vim-rooter')
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } } -- A better statusline
 	-- File management --
-	use('scrooloose/nerdtree')
+  use('nvim-tree/nvim-tree.lua')
   use('ryanoasis/vim-devicons')
 
 	-- Tim Pope Plugins --

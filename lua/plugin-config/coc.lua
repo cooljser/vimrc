@@ -139,4 +139,3 @@ vim.g.UltiSnipsJumpForwardTrigger="<c-b>"
 vim.g.UltiSnipsJumpBackwardTrigger="<c-z>"
 -- Restore session without nerdtree
 vim.o.sessionoptions="buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-vim.g.NERDSpaceDelims = 1
