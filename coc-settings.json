@@ -2,32 +2,19 @@
   "imselect.defaultInput": "com.apple.keylayout.ABC",
   "diagnostic.enable": true,
   "diagnostic.checkCurrentLine": true,
-  "diagnostic.messageDelay": 500,
+  "diagnostic.messageDelay": 200,
   "diagnostic.refreshOnInsertMode": false,
   "suggest.maxCompleteItemCount": 20,
   "suggest.removeDuplicateItems": true,
-  "suggest.timeout": 500,
-  "suggest.enableFloat": false,
-  "signature.triggerSignatureWait": 200,
-  "signature.enable": false,
-  // "suggest.filterOnBackspace": false,
-  // "suggest.insertMode": "insert",
-  // "suggest.floatConfig": {
-    // "highlight": "null"
-  // },
-  // "floatFactory.floatConfig": {
-    // "highlight": "null"
-  // },
-  // "diagnostic.floatConfig": {
-    // "highlight": "null"
-  // },
-  // "signature.floatConfig": {
-    // "highlight": "null"
-  // },
-  // "hover.floatConfig": {
-    // "highlight": "null"
-  // },
   "eslint.autoFixOnSave": true,
+  "eslint.filetypes": ["javascript", "typescript", "javascriptreact", "typescriptreact", "less", "css"],
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ],
   "eslint.quiet": true,
   "emmet.includeLanguages": {"javascript": "javascriptreact"},
   "prettier.bracketSpacing": false,
@@ -36,9 +23,13 @@
   "prettier.printWidth": 120,
   "prettier.jsxSingleQuote": true,
   "prettier.trailingComma": "none",
-  "prettier.semi": true,
+  "prettier.semi": true, 
   "prettier.tabWidth": 2,
+  "cSpell.enabled": false,
+  "cSpell.userWords": [
+    "RECENTLYUSED"
+  ],
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "tsserver.implicitProjectConfig.checkJs": true,
-  "yank.priority": 1,
+  "emmet.priority": 1
 }
