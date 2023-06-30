@@ -36,7 +36,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'phaazon/hop.nvim'
 Plug 'akinsho/toggleterm.nvim'
@@ -327,7 +327,6 @@ nnoremap <F3> :CocOutline<cr>
 nnoremap <F5> : call CompileRunGcc()<CR>
 nnoremap <leader>p :Prettier<CR>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fw <cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>ft <cmd>TodoTelescope<cr>
@@ -377,7 +376,7 @@ nmap <C-n> <Plug>yankstack_substitute_newer_paste
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=0
-let NERDTreeIgnore = ['\.pyc$', '__pycache__', 'node_modules']
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let g:NERDTreeWinSize=35
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
@@ -449,9 +448,9 @@ let g:onedark_terminal_italics=0
 let g:onedark_termcolors=16
 " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 hi Normal guibg=NONE ctermbg=NONE
-" colorscheme onehalflight
-" hi! default CursorWord guibg=#b4dbfd ctermbg=223
-colorscheme onedark
+colorscheme onehalflight
+hi! default CursorWord guibg=#b4dbfd ctermbg=223
+" colorscheme onedark
 
 if has("termguicolors")
   " fix bug for vim
@@ -462,7 +461,7 @@ if has("termguicolors")
   set termguicolors
 endif
 
-hi! default CursorWord guibg=#484b4d ctermbg=223
+" hi! default CursorWord guibg=#484b4d ctermbg=223
 let g:cursorword_min_width = 1
 
 " let g:coc_disable_uncaught_error = 1
@@ -493,3 +492,4 @@ lua << EOF
   }
 EOF
 
+nnoremap <leader>fw <cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>
