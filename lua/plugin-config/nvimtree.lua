@@ -1,7 +1,3 @@
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
@@ -21,9 +17,16 @@ end
 -- OR setup with some options
 require("nvim-tree").setup({
   on_attach = my_on_attach,
+  auto_reload_on_write = true,
   sort_by = "case_sensitive",
+  update_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_cwd = false,
+    ignore_list = {},
+  },
   view = {
-    width = 30,
+    width = 40,
   },
   renderer = {
     group_empty = true,

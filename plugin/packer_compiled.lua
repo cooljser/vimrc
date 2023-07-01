@@ -110,6 +110,11 @@ _G.packer_plugins = {
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/git-conflict.nvim",
     url = "https://github.com/akinsho/git-conflict.nvim"
   },
+  ["github-nvim-theme"] = {
+    loaded = true,
+    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
+    url = "https://github.com/projekt0n/github-nvim-theme"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
@@ -135,6 +140,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/move.nvim",
     url = "https://github.com/fedepujol/move.nvim"
+  },
+  ["neovim-session-manager"] = {
+    loaded = true,
+    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/neovim-session-manager",
+    url = "https://github.com/Shatur/neovim-session-manager"
   },
   nerdcommenter = {
     loaded = true,
@@ -171,6 +181,16 @@ _G.packer_plugins = {
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["telescope-live-grep-args.nvim"] = {
+    loaded = true,
+    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/telescope-live-grep-args.nvim",
+    url = "https://github.com/nvim-telescope/telescope-live-grep-args.nvim"
+  },
+  ["telescope-ui-select.nvim"] = {
+    loaded = true,
+    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
+    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -196,11 +216,6 @@ _G.packer_plugins = {
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-css-color",
     url = "https://github.com/ap/vim-css-color"
   },
-  ["vim-devicons"] = {
-    loaded = true,
-    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-devicons",
-    url = "https://github.com/ryanoasis/vim-devicons"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -221,25 +236,15 @@ _G.packer_plugins = {
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-jsx-typescript",
     url = "https://github.com/peitalin/vim-jsx-typescript"
   },
-  ["vim-misc"] = {
-    loaded = true,
-    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-misc",
-    url = "https://github.com/xolox/vim-misc"
-  },
-  ["vim-rooter"] = {
-    loaded = true,
-    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-rooter",
-    url = "https://github.com/airblade/vim-rooter"
-  },
-  ["vim-session"] = {
-    loaded = true,
-    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-session",
-    url = "https://github.com/xolox/vim-session"
-  },
   ["vim-snippets"] = {
     loaded = true,
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-snippets",
     url = "https://github.com/honza/vim-snippets"
+  },
+  ["vim-startuptime"] = {
+    loaded = true,
+    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-startuptime",
+    url = "https://github.com/dstein64/vim-startuptime"
   },
   ["vim-surround"] = {
     loaded = true,
@@ -254,14 +259,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: git-conflict.nvim
-time([[Config for git-conflict.nvim]], true)
-try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-conflict\frequire\0", "config", "git-conflict.nvim")
-time([[Config for git-conflict.nvim]], false)
 -- Config for: hop.nvim
 time([[Config for hop.nvim]], true)
 try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
 time([[Config for hop.nvim]], false)
+-- Config for: git-conflict.nvim
+time([[Config for git-conflict.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17git-conflict\frequire\0", "config", "git-conflict.nvim")
+time([[Config for git-conflict.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

@@ -6,8 +6,8 @@
 
 local status, packer = pcall(require, 'packer')
 if not status then
-	print('Packer is not installed')
-	return
+  print('Packer is not installed')
+  return
 end
 
 -- Reloads Neovim after whenever you save plugins.lua
@@ -19,61 +19,65 @@ vim.cmd([[
 ]])
 
 packer.startup(function(use)
-	-- Packer can manage itself
-	use('wbthomason/packer.nvim')
-	-- Telescope
-	use({
-		'nvim-telescope/telescope.nvim',
-		tag = '0.1.0',
-		requires = { { 'nvim-lua/plenary.nvim' } },
-	})
+  -- Packer can manage itself
+  use('wbthomason/packer.nvim')
+  -- Telescope
+  use({
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.0',
+    requires = { { 'nvim-lua/plenary.nvim' } },
+  })
+  use('nvim-telescope/telescope-ui-select.nvim')
+  use('nvim-telescope/telescope-live-grep-args.nvim')
+  use('Shatur/neovim-session-manager')
   -- fzf
   use { "ibhagwan/fzf-lua",
     -- optional for icon support
     requires = { "nvim-tree/nvim-web-devicons" }
   }
-	-- use('nvim-treesitter/nvim-treesitter')
-	use('airblade/vim-rooter')
+  -- use('nvim-treesitter/nvim-treesitter')
+  -- use('airblade/vim-rooter')
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } } -- A better statusline
-	-- File management --
+  -- use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+  -- File management --
   use('nvim-tree/nvim-tree.lua')
-  use('ryanoasis/vim-devicons')
+  -- use('ryanoasis/vim-devicons')
 
-	-- Tim Pope Plugins --
-	use('tpope/vim-surround')
-	-- Syntax Highlighting and Colors --
-	-- use('sheerun/vim-polyglot')
-	use('maxmellon/vim-jsx-pretty')
-	use('ap/vim-css-color')
-	use('leafgarland/typescript-vim')
-	use('peitalin/vim-jsx-typescript')
-	-- Colorschemes -
-	use('navarasu/onedark.nvim')
-	-- hop --
-	use {
-		'phaazon/hop.nvim',
-		branch = 'v2', -- optional but strongly recommended
-		config = function()
-			-- you can configure Hop the way you like here; see :h hop-config
-			require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-		end
-	}
-	use('akinsho/toggleterm.nvim')
-	use('neoclide/coc.nvim')
-	use('tpope/vim-fugitive')
-	use('airblade/vim-gitgutter')
-	use('nvim-lua/plenary.nvim')
-	use('lewis6991/gitsigns.nvim')
-	use('preservim/nerdcommenter')
-	use('yggdroot/indentline')
-	use('rafi/awesome-vim-colorschemes')
-	use('xolox/vim-misc')
-	use('xolox/vim-session')
-	use('xiyaowong/nvim-transparent')
-	use('christoomey/vim-tmux-navigator')
-	use('SirVer/ultisnips')
-	use('honza/vim-snippets')
-	use('mileszs/ack.vim')
+  -- Tim Pope Plugins --
+  use('tpope/vim-surround')
+  -- Syntax Highlighting and Colors --
+  -- use('sheerun/vim-polyglot')
+  use('maxmellon/vim-jsx-pretty')
+  use('ap/vim-css-color')
+  -- use('groenewege/vim-less')
+  use('leafgarland/typescript-vim')
+  use('peitalin/vim-jsx-typescript')
+  -- Colorschemes -
+  use('navarasu/onedark.nvim')
+  use('projekt0n/github-nvim-theme')
+  -- hop --
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  }
+  use('akinsho/toggleterm.nvim')
+  use('neoclide/coc.nvim')
+  use('tpope/vim-fugitive')
+  use('airblade/vim-gitgutter')
+  use('nvim-lua/plenary.nvim')
+  use('lewis6991/gitsigns.nvim')
+  use('preservim/nerdcommenter')
+  use('yggdroot/indentline')
+  use('rafi/awesome-vim-colorschemes')
+  use('xiyaowong/nvim-transparent')
+  use('christoomey/vim-tmux-navigator')
+  use('SirVer/ultisnips')
+  use('honza/vim-snippets')
+  use('mileszs/ack.vim')
   use('fedepujol/move.nvim')
   use('github/copilot.vim')
   use('sindrets/diffview.nvim')
@@ -83,8 +87,9 @@ packer.startup(function(use)
       require('git-conflict').setup()
     end
   }
+  use('dstein64/vim-startuptime')
 
-	if packer_bootstrap then
-		packer.sync()
-	end
+  if packer_bootstrap then
+    packer.sync()
+  end
 end)

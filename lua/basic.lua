@@ -88,8 +88,3 @@ opt.mouse = "a"
 -- Map <leader> to space
 g.mapleader = " "
 g.maplocalleader = " "
-
--- session
-g.session_autoload = 'yes'
-g.session_autosave = 'yes'
-g.session_default_to_last = 1

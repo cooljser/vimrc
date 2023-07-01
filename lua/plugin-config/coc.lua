@@ -132,10 +132,7 @@ vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}"
 -- Mappings for CoCList
 -- code actions and coc stuff
 ---@diagnostic disable-next-line: redefined-local
-local opts = {silent = true, nowait = true}
 -- Fix tab keymap conflict
 vim.g.UltiSnipsExpandTrigger="<c-e>"
 vim.g.UltiSnipsJumpForwardTrigger="<c-b>"
 vim.g.UltiSnipsJumpBackwardTrigger="<c-z>"
--- Restore session without nerdtree
-vim.o.sessionoptions="buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

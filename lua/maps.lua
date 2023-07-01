@@ -35,15 +35,15 @@ map("n", "M", "%")
 map("i", "<C-E>", "<ESC>A")
 map("i", "<C-A>", "<ESC>I")
 
--- Load recent sessions
-map("n", "<leader>sl", "<CMD>SessionLoad<CR>")
-
 -- Keybindings for telescope
 map("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>")
 map("n", "<leader>ff", "<CMD>Telescope find_files<CR>")
-map("n", "<leader>fw", "<CMD>Telescope live_grep<CR>")
+map("n", "<leader>fw", "<CMD>Telescope live_grep_args<CR>")
 map("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
 map("n", "<leader>ht", "<CMD>Telescope colorscheme<CR>")
+local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+map('n', "<leader>a", live_grep_args_shortcuts.grep_word_under_cursor)
+map("n", "<leader>fp", "<CMD>SessionManager load_session<CR>")
 
 -- NvimTree
 map("n", "<leader>nn", "<CMD>NvimTreeToggle<CR>")
@@ -54,10 +54,6 @@ map("n", "<C-j>", "<C-W>j")
 map("n", "<C-k>", "<C-W>k")
 map("n", "<C-h>", "<C-W>h")
 map("n", "<C-l>", "<C-W>l")
-
--- Sessions
-map("n", "<leader>so", "<CMD>OpenSession<CR>")
-map("n", "<leader>ss", "<CMD>SaveSession<CR>")
 
 -- Ack
 vim.keymap.set("n", "<leader>g", ":Ack!<Space>", { silent = false })
@@ -79,7 +75,6 @@ map('n', "<leader>gc", "<CMD>DiffviewClose<CR>")
 
 -- Fzf
 map('n', "<C-f>", "<CMD>FzfLua files<CR>")
-map('n', "<leader>a", "<CMD>FzfLua grep_cword<CR>")
 
 -- 插件快捷键
 local pluginKeys = {}
