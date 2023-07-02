@@ -35,7 +35,6 @@ packer.startup(function(use)
     -- optional for icon support
     requires = { "nvim-tree/nvim-web-devicons" }
   }
-  -- use('nvim-treesitter/nvim-treesitter')
   -- use('airblade/vim-rooter')
   use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } } -- A better statusline
   -- use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
@@ -46,7 +45,7 @@ packer.startup(function(use)
   -- Tim Pope Plugins --
   use('tpope/vim-surround')
   -- Syntax Highlighting and Colors --
-  -- use('sheerun/vim-polyglot')
+  use('sheerun/vim-polyglot')
   use('maxmellon/vim-jsx-pretty')
   use('ap/vim-css-color')
   -- use('groenewege/vim-less')
@@ -63,6 +62,11 @@ packer.startup(function(use)
       -- you can configure Hop the way you like here; see :h hop-config
       require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
+  }
+  -- Treesittetr
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate"
   }
   use('akinsho/toggleterm.nvim')
   use('neoclide/coc.nvim')

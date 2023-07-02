@@ -13,4 +13,4 @@ require('plugin-config.move')
 require('plugin-config.fzf')
 require('plugin-config.nvimtree')
 require('plugin-config.neovim-session-manager')
-
+-- require('plugin-config.treesitter')

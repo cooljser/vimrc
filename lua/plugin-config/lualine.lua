@@ -95,6 +95,7 @@ lualine.setup({
   },
   tabline = {
     lualine_c = { tabline_file_name },
+    lualine_z = {'tabs'}
   },
   extensions = {},
 })

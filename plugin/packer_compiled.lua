@@ -161,6 +161,11 @@ _G.packer_plugins = {
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
     url = "https://github.com/nvim-tree/nvim-tree.lua"
   },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -235,6 +240,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-jsx-typescript",
     url = "https://github.com/peitalin/vim-jsx-typescript"
+  },
+  ["vim-polyglot"] = {
+    loaded = true,
+    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-polyglot",
+    url = "https://github.com/sheerun/vim-polyglot"
   },
   ["vim-snippets"] = {
     loaded = true,
