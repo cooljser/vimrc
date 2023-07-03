@@ -14,6 +14,27 @@ local function my_on_attach(bufnr)
   vim.keymap.set('n', 's', api.node.open.vertical, opts('Open: Vertical Split'))
 end
 
+local glyphs = {
+  default = "",
+  symlink = "",
+  git = {
+    unstaged = "",
+    staged = "S",
+    unmerged = "",
+    renamed = "➜",
+    deleted = "",
+    untracked = "U",
+    ignored = "◌",
+  },
+  folder = {
+    default = "",
+    open = "",
+    empty = "",
+    empty_open = "",
+    symlink = "",
+  },
+}
+
 -- OR setup with some options
 require("nvim-tree").setup({
   on_attach = my_on_attach,
@@ -21,7 +42,7 @@ require("nvim-tree").setup({
   sort_by = "case_sensitive",
   update_cwd = true,
   update_focused_file = {
-    enable = true,
+    enable = false,
     update_cwd = false,
     ignore_list = {},
   },
@@ -29,10 +50,19 @@ require("nvim-tree").setup({
     width = 40,
   },
   renderer = {
-    group_empty = true,
+    icons = {
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+        modified = true,
+      },
+      glyphs = glyphs
+    }
   },
   filters = {
     dotfiles = true,
-  },
+  }
 })
 

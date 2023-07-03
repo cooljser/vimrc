@@ -47,11 +47,11 @@ packer.startup(function(use)
   -- Syntax Highlighting and Colors --
   use('sheerun/vim-polyglot')
   -- use('neoclide/vim-jsx-improve')
-  use('maxmellon/vim-jsx-pretty')
+  -- use('maxmellon/vim-jsx-pretty')
   use('ap/vim-css-color')
   -- use('groenewege/vim-less')
   use('leafgarland/typescript-vim')
-  use('peitalin/vim-jsx-typescript')
+  -- use('peitalin/vim-jsx-typescript')
   -- Colorschemes -
   use('navarasu/onedark.nvim')
   use('projekt0n/github-nvim-theme')
@@ -92,12 +92,7 @@ packer.startup(function(use)
       require('git-conflict').setup()
     end
   }
-  use {
-    'itchyny/vim-cursorword',
-    config = function()
-      vim.api.nvim_set_hl(0, "CursorWord", { bg='#454b59', underline=false})
-    end
-  }
+  use { 'itchyny/vim-cursorword' }
   use('dstein64/vim-startuptime')
 
   if packer_bootstrap then
