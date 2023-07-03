@@ -46,6 +46,7 @@ packer.startup(function(use)
   use('tpope/vim-surround')
   -- Syntax Highlighting and Colors --
   use('sheerun/vim-polyglot')
+  -- use('neoclide/vim-jsx-improve')
   use('maxmellon/vim-jsx-pretty')
   use('ap/vim-css-color')
   -- use('groenewege/vim-less')
@@ -64,10 +65,10 @@ packer.startup(function(use)
     end
   }
   -- Treesittetr
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate"
-  }
+  --use {
+    --"nvim-treesitter/nvim-treesitter",
+    --run = ":TSUpdate"
+  --}
   use('akinsho/toggleterm.nvim')
   use('neoclide/coc.nvim')
   use('tpope/vim-fugitive')
@@ -89,6 +90,12 @@ packer.startup(function(use)
     'akinsho/git-conflict.nvim',
     config = function()
       require('git-conflict').setup()
+    end
+  }
+  use {
+    'itchyny/vim-cursorword',
+    config = function()
+      vim.api.nvim_set_hl(0, "CursorWord", { bg='#454b59', underline=false})
     end
   }
   use('dstein64/vim-startuptime')

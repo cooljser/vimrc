@@ -1,3 +1,4 @@
+-- https://github.com/ravenxrz/dotfiles
 require('plugins')
 require('basic')
 require('maps')
