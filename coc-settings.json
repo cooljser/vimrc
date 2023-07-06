@@ -31,5 +31,6 @@
   ],
   "tsserver.implicitProjectConfig.experimentalDecorators": true,
   "tsserver.implicitProjectConfig.checkJs": true,
-  "emmet.priority": 1
+  "emmet.priority": 1,
+  "java.import.gradle.java.home": "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 }

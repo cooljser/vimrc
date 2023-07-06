@@ -26,8 +26,10 @@ map("n", "<leader>3", "3gt<CR>")
 map("n", "<leader>ev", "<CMD>:vs ~/.config/nvim/init.lua<CR>")
 map("n", "<leader>r", "<CMD>e!<CR>")
 map("n", "H", "^")
+map("n", "yH", "y^")
 map("n", "dh", "d^")
 map("n", "L", "$")
+map("n", "yL", "y$")
 map("n", "dl", "d$")
 map("n", "M", "%")
 
@@ -40,7 +42,6 @@ map("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>")
 map("n", "<leader>ff", "<CMD>Telescope find_files<CR>")
 map("n", "<leader>fw", "<CMD>Telescope live_grep_args<CR>")
 map("n", "<leader>fb", "<CMD>Telescope buffers<CR>")
-map("n", "<leader>ft", "<CMD>Telescope colorscheme<CR>")
 local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
 map('n', "<leader>a", live_grep_args_shortcuts.grep_word_under_cursor)
 map("n", "<leader>fp", "<CMD>SessionManager load_session<CR>")
@@ -75,6 +76,7 @@ map('n', "<leader>gc", "<CMD>DiffviewClose<CR>")
 
 -- Fzf
 map('n', "<C-f>", "<CMD>FzfLua files<CR>")
+map("n", "<leader>ft", "<CMD>FzfLua colorschemes<CR>")
 
 -- Auto log
 map('n', "<leader>l", '"ayiwoconsole.log(\'<C-R>a:\', <C-R>a);<Esc>')

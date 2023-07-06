@@ -88,3 +88,5 @@ opt.mouse = "a"
 -- Map <leader> to space
 g.mapleader = " "
 g.maplocalleader = " "
+
+o.modifiable = true
