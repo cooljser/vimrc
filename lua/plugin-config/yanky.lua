@@ -12,6 +12,11 @@ require("yanky").setup({
   preserve_cursor_position = {
     enabled = true,
   },
+  highlight = {
+    on_put = false,
+    on_yank = false,
+    timer = 500,
+  },
 })
 
 vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
