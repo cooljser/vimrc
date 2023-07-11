@@ -262,6 +262,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/envision/.local/share/nvim/site/pack/packer/start/vim-tmux-navigator",
     url = "https://github.com/christoomey/vim-tmux-navigator"
+  },
+  ["yanky.nvim"] = {
+    loaded = true,
+    path = "/Users/envision/.local/share/nvim/site/pack/packer/start/yanky.nvim",
+    url = "https://github.com/gbprod/yanky.nvim"
   }
 }
 

@@ -102,6 +102,7 @@ packer.startup(function(use)
     end,
     ft = { "markdown" }
   })
+  use('gbprod/yanky.nvim')
 
   if packer_bootstrap then
     packer.sync()
