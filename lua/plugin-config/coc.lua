@@ -94,8 +94,16 @@ vim.api.nvim_create_autocmd("User", {
     desc = "Update signature help on jump placeholder"
 })
 
+local opts = {silent = true, nowait = true}
+
+-- Remap keys for apply code actions at the cursor position.
+keyset("n", "<leader>fc", "<Plug>(coc-codeaction-cursor)", opts)
 -- Apply the most preferred quickfix action on the current line.
 keyset("n", "<leader>qf", "<Plug>(coc-fix-current)", opts)
+
+-- Remap keys for apply refactor code actions.
+keyset("n", "<leader>re", "<Plug>(coc-codeaction-refactor)", { silent = true })
+keyset("x", "<leader>r", "<Plug>(coc-codeaction-refactor-selected)", { silent = true })
 
 -- Map function and class text objects
 -- NOTE: Requires 'textDocument.documentSymbol' support from the language server
