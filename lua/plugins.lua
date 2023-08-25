@@ -47,7 +47,7 @@ packer.startup(function(use)
   -- Syntax Highlighting and Colors --
   use('sheerun/vim-polyglot')
   -- use('neoclide/vim-jsx-improve')
-  -- use('maxmellon/vim-jsx-pretty')
+  use('maxmellon/vim-jsx-pretty')
   use('ap/vim-css-color')
   -- use('groenewege/vim-less')
   use('leafgarland/typescript-vim')
