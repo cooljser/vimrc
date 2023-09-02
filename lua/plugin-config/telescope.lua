@@ -12,6 +12,15 @@ end
 local lga_actions = require("telescope-live-grep-args.actions")
 
 telescope.setup({
+  defaults = {
+    layout_strategy = "horizontal",
+    layout_config = {
+      horizontal = {
+        prompt_position = "top",
+      },
+    },
+    sorting_strategy = "ascending"
+  },
   extensions = {
     file_browser = {
       theme = "ivy",

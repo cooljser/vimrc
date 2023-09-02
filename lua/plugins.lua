@@ -84,7 +84,8 @@ packer.startup(function(use)
   use('honza/vim-snippets')
   use('mileszs/ack.vim')
   use('fedepujol/move.nvim')
-  use('github/copilot.vim')
+  -- use('github/copilot.vim')
+  use('Exafunction/codeium.vim')
   use('sindrets/diffview.nvim')
   use {
     'akinsho/git-conflict.nvim',
@@ -94,14 +95,14 @@ packer.startup(function(use)
   }
   use { 'itchyny/vim-cursorword' }
   use('dstein64/vim-startuptime')
-  use({ 
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    setup = function() 
-      vim.g.mkdp_filetypes = { "markdown" } 
-    end,
-    ft = { "markdown" }
-  })
+  --use({ 
+    --"iamcco/markdown-preview.nvim",
+    --run = "cd app && npm install",
+    --setup = function() 
+      --vim.g.mkdp_filetypes = { "markdown" } 
+    --end,
+    --ft = { "markdown" }
+  --})
   use('gbprod/yanky.nvim')
 
   if packer_bootstrap then

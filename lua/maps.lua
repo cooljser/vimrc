@@ -75,7 +75,8 @@ map('n', "<leader>gd", "<CMD>DiffviewOpen<CR>")
 map('n', "<leader>gc", "<CMD>DiffviewClose<CR>")
 
 -- Fzf
-map('n', "<C-f>", "<CMD>FzfLua files<CR>")
+--map('n', "<C-f>", "<CMD>FzfLua files<CR>")
+map('n', "<C-f>", "<CMD>Telescope find_files<CR>")
 map("n", "<leader>ft", "<CMD>FzfLua colorschemes<CR>")
 
 -- Auto log
