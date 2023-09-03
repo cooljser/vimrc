@@ -104,6 +104,8 @@ packer.startup(function(use)
     --ft = { "markdown" }
   --})
   use('gbprod/yanky.nvim')
+  -- se('echasnovski/mini.move')
+  use('booperlv/nvim-gomove')
 
   if packer_bootstrap then
     packer.sync()
